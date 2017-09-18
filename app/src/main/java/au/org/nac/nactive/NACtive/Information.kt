@@ -9,5 +9,7 @@ class Information : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information)
+
+        //TODO This will be the information hub, Guides, Help and Stats
     }
 }

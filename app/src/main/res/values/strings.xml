@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">NACtive</string>
+
+    <!-- Buttons -->
+    <string name="setup_btn_text">Setup</string>
+    <string name="information_btn_text">Information</string>
+    <string name="exercises_activity_btn_text">Exercise</string>
 </resources>

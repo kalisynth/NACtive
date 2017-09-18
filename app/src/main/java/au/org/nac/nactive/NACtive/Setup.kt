@@ -9,5 +9,7 @@ class Setup : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setup)
+
+        //TODO This will be the Setup Hub containing all the setup screens, User, Exercise and Sessions
     }
 }

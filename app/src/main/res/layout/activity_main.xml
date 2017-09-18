@@ -7,9 +7,28 @@
         android:layout_height="match_parent"
         tools:context="au.org.nac.nactive.NACtive.MainActivity">
 
-    <TextView
+    <Button
+            android:id="@+id/main_exercise_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="@string/exercises_activity_btn_text"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/main_setup_btn"/>
+
+    <Button
+            android:id="@+id/main_setup_btn"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/setup_btn_text"
+            android:layout_centerInParent="true"
+        />
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_information_btn"
+            android:layout_centerHorizontal="true"
+            android:text="@string/information_btn_text"
+            android:layout_below="@+id/main_setup_btn"/>
 
 </RelativeLayout>

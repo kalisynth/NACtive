@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'io.objectbox'
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
@@ -33,6 +35,7 @@ def supportLibVersion = '26.1.0'
 def archVersion = '1.0.0-alpha8'
 def daggerVersion = '2.11'
 def anko_version = "0.10.1"
+def objectBoxVersion = '1.0.1'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -45,6 +48,10 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "com.android.support:cardview-v7:$supportLibVersion"
     compile "com.android.support:recyclerview-v7:$supportLibVersion"
+
+    //ObjectBox
+    compile "io.objectbox:objectbox-android:$objectBoxVersion"
+    compile "io.objectbox:objectbox-kotlin:$objectBoxVersion"
 
     //Arch Version
     implementation "android.arch.lifecycle:runtime:$archVersion"
