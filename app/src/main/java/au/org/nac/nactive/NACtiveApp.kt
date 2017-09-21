@@ -6,6 +6,13 @@ import au.org.nac.nactive.inject.AppComponent
 import au.org.nac.nactive.inject.AppModule
 import au.org.nac.nactive.inject.DaggerAppComponent
 import com.chibatching.kotpref.Kotpref
+import io.requery.Persistable
+import io.requery.android.sqlite.DatabaseSource
+import io.requery.reactivex.KotlinReactiveEntityStore
+import io.requery.sql.KotlinEntityDataStore
+import io.requery.sql.TableCreationMode
+
+//import io.objectbox.BoxStore
 
 /**
  * NACTive Application Class
@@ -20,7 +27,18 @@ class NACtiveApp : Application(){
                 .build()
     }
 
-    companion object {
+    companion object Constants {
+        const val TAG = "NACtiveApp"
+    }
+
+    val data: KotlinReactiveEntityStore<Persistable> by lazy {
+        val source = DatabaseSource(this, Models.DEFAULT, 1)
+        source.setTableCreationMode(TableCreationMode.DROP_CREATE)
+        KotlinReactiveEntityStore<Persistable>(KotlinEntityDataStore(source.configuration))
+    }
+
+
+    /*companion object {
         @JvmField
         var context : Context? = null
 
@@ -28,12 +46,17 @@ class NACtiveApp : Application(){
         @JvmStatic fun getMyApplicationContext(): Context? {
             return context
         }
-    }
+    }*/
+
+    /*//lateinit var boxStore: BoxStore
+    private set*/
 
     override fun onCreate(){
         super.onCreate()
         component.inject(this)
 
         Kotpref.init(this)
+
+        //boxStore = MyObjectBox.builder().androidContext(this).build()
     }
 }
