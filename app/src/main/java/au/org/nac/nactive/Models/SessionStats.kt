@@ -1,21 +1,25 @@
 package au.org.nac.nactive.Models
 
-/*import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
-import io.objectbox.relation.ToOne*/
+import io.requery.Entity
+import io.requery.Generated
+import io.requery.Key
+import io.requery.ManyToOne
+
 
 /**
- * Created by Cade2 on 19/09/2017.
+ * Session Stats Interface Model
  */
 
-//@Entity
-        class SessionStats {
-    //@Id
-    var id: Long = 0
+@Entity
+interface SessionStats {
+    @get:Key
+    @get:Generated
+    var id: Int
 
-    var time: Long = 0
-    var completed: Boolean = false
-    var exerciseStoppedOn : String = ""
+    var time: Long
+    var completed: Boolean
+    var exerciseStoppedOn : String
 
-    //lateinit var session: ToOne<ExerciseSession>
+    @get:ManyToOne
+    var exerciseSession : ExerciseSession
 }

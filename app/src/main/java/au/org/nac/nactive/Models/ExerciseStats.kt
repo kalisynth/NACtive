@@ -1,20 +1,23 @@
 package au.org.nac.nactive.Models
 
-/*import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
-import io.objectbox.relation.ToOne*/
+import io.requery.Entity
+import io.requery.Generated
+import io.requery.Key
+import io.requery.ManyToOne
 
 /**
  * Exericse Stats
  */
-//@Entity
-class ExerciseStats {
-    //@Id
-    var id: Long = 0
 
-    val time: Long = 0
-    val repetitions: Int = 0
-    val totalDone: Int = 0
+@Entity
+interface ExerciseStats {
+    @get:Key
+    @get:Generated
+    var id: Int
+    val time: Long
+    val repetitions: Int
+    val totalDone: Int
 
-    //lateinit var exercise: ToOne<Exercise>
+    @get:ManyToOne
+    var exercise : Exercise
 }

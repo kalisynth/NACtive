@@ -1,26 +1,27 @@
 package au.org.nac.nactive.Models
 
-/*
-import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
-import io.objectbox.relation.ToOne
-*/
+import io.requery.*
 
 /**
  * Exericse Session Model
  */
 
-//@Entity
-        class ExerciseSession {
-    //@Id
-    var id: Long = 0
-    val name: String = ""
-    val frequencySchedule: ScheduleFrequency = ScheduleFrequency.ALWAYS
-    val maxTime: Long = 0
-    val minTime: Long = 0
-    val avgTime: Long = 0
-    val overallTotal: Int = 0
+@Entity
+interface ExerciseSession : Persistable {
+    @get:Key
+    @get:Generated
+    var id: Int
+    val name: String
+    val frequencySchedule: ScheduleFrequency
+    val maxTime: Long
+    val minTime: Long
+    val avgTime: Long
+    val overallTotal: Int
 
-    //lateinit var user: ToOne<User>
+    @get:ForeignKey
+    @get:ManyToOne
+    var user: User
 
+    @get:OneToMany(mappedBy = "exerciseSession")
+    val sessionStats: MutableSet<SessionStats>
 }
