@@ -20,6 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "EN_KEY", EN_KEY)
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -40,6 +41,8 @@ android {
 }
 
 def supportLibVersion = '26.1.0'
+def googleServicesVersion = '11.4.0'
+def encryptionVersion = '2.0.1'
 def archVersion = '1.0.0-alpha8'
 def daggerVersion = '2.11'
 def anko_version = "0.10.1"
@@ -60,6 +63,9 @@ dependencies {
     implementation 'com.android.support:support-v4:26.1.0'
     compile "com.android.support:cardview-v7:$supportLibVersion"
     compile "com.android.support:recyclerview-v7:$supportLibVersion"
+
+    //Google Services
+    compile "com.google.android.gms:play-services-auth:$googleServicesVersion"
 
     //Arch Version
     implementation "android.arch.lifecycle:runtime:$archVersion"
@@ -92,8 +98,12 @@ dependencies {
 
     compile 'com.mcxiaoke.koi:core:0.5.4'
 
+    //RXAndroid and Kotlin
     compile "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version"
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    //Encryption
+    compile "com.github.simbiose:Encryption:$encryptionVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {

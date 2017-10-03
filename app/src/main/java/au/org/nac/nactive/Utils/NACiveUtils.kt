@@ -1,8 +1,7 @@
-package au.org.nac.nactive
+package au.org.nac.nactive.Utils
 
 import android.app.FragmentManager
 import android.app.FragmentTransaction
-import android.widget.ImageView
 import com.mcxiaoke.koi.ext.asDateString
 import com.mcxiaoke.koi.ext.asString
 import com.mcxiaoke.koi.ext.dateParse
@@ -31,4 +30,6 @@ object NACiveUtils {
         val date = dateParse(dString)
         return date.asString(timeFormat)
     }
+
+
 }

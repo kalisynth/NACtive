@@ -7,4 +7,5 @@ import com.chibatching.kotpref.KotprefModel
  */
 object CurrentUser : KotprefModel() {
     var name by stringPref()
+    var userId by longPref()
 }

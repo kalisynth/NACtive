@@ -19,6 +19,8 @@ interface User : Parcelable, Persistable {
     var currentSession: String
     var previousSession: String
 
+    var password: String
+
     @get:OneToMany(mappedBy = "user")
     val exerciseSessions : MutableSet<ExerciseSession>
 }

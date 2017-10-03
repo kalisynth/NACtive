@@ -18,6 +18,8 @@
     <string name="setup_exercise_btn_text">Exercise</string>
     <string name="setup_save_btn_txt">Save</string>
     <string name="home_btn_txt">Home</string>
+    <string name="nongooglesignin_btn_txt">Sign In(Without Google)</string>
+    <string name="nongooglesignout_btn_txt">Sign Out(Without Google)</string>
 
     <!-- Text -->
     <string name="nactivemotto">Let\'s get NACTIVE</string>

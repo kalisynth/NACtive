@@ -6,7 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import au.org.nac.nactive.NACiveUtils
+import au.org.nac.nactive.Utils.NACiveUtils
 import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.R
 import au.org.nac.nactive.model.CurrentUser
