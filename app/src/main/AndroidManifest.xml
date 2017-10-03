@@ -23,6 +23,10 @@
         </activity>
         <activity android:name=".NACtive.ExercisesActivity">
         </activity>
+        <activity android:name=".NACtive.EditExercise">
+        </activity>
+        <activity android:name=".NACtive.EditUser">
+        </activity>
     </application>
 
 </manifest>

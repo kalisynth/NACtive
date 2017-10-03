@@ -5,30 +5,60 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/mainbgcolor"
         tools:context="au.org.nac.nactive.NACtive.MainActivity">
 
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nactivemotto"
+            android:gravity="center"
+            style="@style/Base.TextAppearance.AppCompat.Headline"
+            android:id="@+id/textView"/>
+
     <Button
+            style="@style/NACNavButton"
             android:id="@+id/main_exercise_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:text="@string/exercises_activity_btn_text"
             android:layout_centerHorizontal="true"
             android:layout_above="@+id/main_setup_btn"/>
 
     <Button
+            style="@style/NACNavButton"
             android:id="@+id/main_setup_btn"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_marginBottom="15dp"
             android:text="@string/setup_btn_text"
             android:layout_centerInParent="true"
         />
 
     <Button
+            style="@style/NACNavButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/main_information_btn"
             android:layout_centerHorizontal="true"
             android:text="@string/information_btn_text"
             android:layout_below="@+id/main_setup_btn"/>
+
+    <Button
+            style="@style/NACActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_login_btn"/>
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/newlogonb"
+            android:id="@+id/imageView"
+            android:layout_marginTop="43dp"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentStart="true"
+            android:contentDescription="@string/naclogocd"/>
 
 </RelativeLayout>

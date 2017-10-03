@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+                android:background="@color/mainbgcolor"
+             tools:context="au.org.nac.nactive.fragments.UserSetupFragment">
+
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_setup_name_layout">
+
+        <TextView
+                style="@style/NACLabelText"
+                android:text="@string/setup_name_label_text"
+                android:labelFor="@id/user_setup_name_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_setup_name_label"
+                android:layout_weight="1"/>
+
+        <EditText
+                style="@style/NACEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/setup_name_label_text"
+                android:ems="10"
+                android:id="@+id/user_setup_name_edittext"
+                android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <Button
+            style="@style/NACActionButton"
+            android:text="@string/setup_save_btn_txt"
+            android:layout_below="@id/user_setup_name_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_setup_save_btn"/>
+
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_setup_save_btn"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/user_setup_info"/>
+</RelativeLayout>

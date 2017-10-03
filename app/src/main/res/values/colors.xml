@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- NACTIVITY Colors -->
+    <color name="mainbgcolor">#40abcf</color>
+    <color name="navbuttoncolor">#f2f692</color>
+    <color name="nacblack">#000000</color>
+    <color name="nacwhite">#ffffff</color>
+    <color name="confirmbtncolor">#49d84b</color>
+    <color name="listbgcolor">#beecfc</color>
+    <color name="listtextcolor">#3bcb3d</color>
+    <color name="actionbtncolor">#d94c9e</color>
 </resources>

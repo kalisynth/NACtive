@@ -8,4 +8,53 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="NACNavButton" parent= "android:style/Widget.Button">
+        <item name="android:background">@color/navbuttoncolor</item>
+        <item name="android:textColor">@color/nacblack</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+
+    <style name="NACConfirmButton" parent= "android:style/Widget.Button">
+        <item name="android:background">@color/confirmbtncolor</item>
+        <item name="android:textColor">@color/nacblack</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+
+    <style name="NACActionButton" parent= "android:style/Widget.Button">
+        <item name="android:background">@color/actionbtncolor</item>
+        <item name="android:textColor">@color/nacblack</item>
+        <item name="android:shadowColor">@color/nacblack</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">3</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+
+    <style name="NACLabelText" parent= "android:style/Widget.TextView">
+        <item name="android:background">@color/mainbgcolor</item>
+        <item name="android:textColor">@color/nacblack</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="NACEditText" parent= "android:style/Widget.EditText">
+        <item name="android:background">@color/listbgcolor</item>
+        <item name="android:textColor">@color/nacblack</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
 </resources>

@@ -1,10 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/mainbgcolor"
         tools:context="au.org.nac.nactive.NACtive.Setup">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+            style="@style/NACLabelText"
+            android:text="@string/setup_btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/setupTitle"/>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/setupTitle"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:id="@+id/setup_btn_bar">
+
+        <Button
+                style="@style/NACNavButton"
+                android:text="@string/setup_user_btn_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/setup_user_btn"
+                android:layout_margin="10dp"
+                android:layout_weight="1"/>
+
+        <Button
+                style="@style/NACNavButton"
+                android:text="@string/setup_exercise_btn_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/setup_exercise_btn"
+                android:layout_margin="10dp"
+                android:layout_weight="1"/>
+
+        <Button
+                style="@style/NACNavButton"
+                android:text="@string/setup_session_btn_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:id="@+id/setup_session_btn"
+                android:layout_weight="1"/>
+    </LinearLayout>
+    <Button
+            style="@style/NACNavButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/setup_btn_bar"
+            android:id="@+id/setup_home_btn"
+            android:text="@string/home_btn_txt"/>
+</RelativeLayout>

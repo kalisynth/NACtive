@@ -1,11 +1,6 @@
-package au.org.nac.nactive.Models
+package au.org.nac.nactive.model
 
 import io.requery.*
-
-/*import io.objectbox.annotation.Backlink
-import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
-import io.objectbox.relation.ToMany*/
 
 /**
  * Exercise Model
@@ -26,9 +21,12 @@ interface Exercise : Persistable{
     val experience: Int
     val overallTotal: Int
 
+    @get:Convert(StringListConverter::class)
+    val steps: ArrayList<String>
+
     @get:ManyToMany
-    val exerciseSession : Set<ExerciseSession>
+    val exerciseSessions : ExerciseSession
 
     @get:OneToMany(mappedBy = "exercise")
-    val exerciseStats: MutableSet<ExerciseStats>
+    val exerciseStats : MutableSet<ExerciseStats>
 }

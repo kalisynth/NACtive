@@ -1,8 +1,7 @@
 package au.org.nac.nactive
 
 import android.app.Application
-import android.content.Context
-import au.org.nac.nactive.Models.Models
+import au.org.nac.nactive.model.Models
 import au.org.nac.nactive.inject.AppComponent
 import au.org.nac.nactive.inject.AppModule
 import au.org.nac.nactive.inject.DaggerAppComponent

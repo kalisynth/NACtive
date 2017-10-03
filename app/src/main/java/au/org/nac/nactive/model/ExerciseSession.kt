@@ -1,4 +1,4 @@
-package au.org.nac.nactive.Models
+package au.org.nac.nactive.model
 
 import io.requery.*
 
@@ -18,10 +18,13 @@ interface ExerciseSession : Persistable {
     val avgTime: Long
     val overallTotal: Int
 
-    @get:ForeignKey
     @get:ManyToOne
-    var user: User
+    var user : User
 
-    @get:OneToMany(mappedBy = "exerciseSession")
-    val sessionStats: MutableSet<SessionStats>
+    @get:ManyToMany(mappedBy = "exerciseSessions")
+    @get:JunctionTable
+    val getExercises : List<Exercise>
+
+    @get:OneToMany
+    val sessionStats : MutableSet<SessionStats>
 }

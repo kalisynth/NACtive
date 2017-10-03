@@ -2,7 +2,7 @@ package au.org.nac.nactive.NACtive
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import au.org.nac.nactive.Models.CurrentUser
+import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.R
 
 class ExercisesActivity : AppCompatActivity() {

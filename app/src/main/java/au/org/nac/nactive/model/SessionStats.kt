@@ -1,4 +1,4 @@
-package au.org.nac.nactive.Models
+package au.org.nac.nactive.model
 
 import io.requery.Entity
 import io.requery.Generated

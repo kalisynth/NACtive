@@ -1,4 +1,4 @@
-package au.org.nac.nactive.Models
+package au.org.nac.nactive.model
 
 /**
  * Schedule Enum
