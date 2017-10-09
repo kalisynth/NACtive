@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="stdMargin">5dp</dimen>
+    <dimen name="lrgMargin">15dp</dimen>
+    <dimen name="smlMargin">2dp</dimen>
+</resources>

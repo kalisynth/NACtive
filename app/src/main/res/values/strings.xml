@@ -18,12 +18,14 @@
     <string name="setup_exercise_btn_text">Exercise</string>
     <string name="setup_save_btn_txt">Save</string>
     <string name="home_btn_txt">Home</string>
+    <string name="sign_out_btn_txt">Sign Out</string>
     <string name="nongooglesignin_btn_txt">Sign In(Without Google)</string>
-    <string name="nongooglesignout_btn_txt">Sign Out(Without Google)</string>
+    <string name="revoke_access_btn_txt">Revoke Google Access</string>
 
     <!-- Text -->
     <string name="nactivemotto">Let\'s get NACTIVE</string>
     <string name="setup_name_label_text">Name: </string>
+    <string name="setup_password_label_text">Password: </string>
     <string name="setup_description_label_text">Description: </string>
     <string name="setup_difficulty_label_text">Difficulty: </string>
     <string name="setup_repetitions_label_text">Repetitions: </string>

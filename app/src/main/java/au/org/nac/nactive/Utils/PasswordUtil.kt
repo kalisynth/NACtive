@@ -22,14 +22,15 @@ object PasswordUtil {
         return encrypted + ":" + newSalt
     }
 
-    fun checkPassword(newpassword: String, salt: String, oldpassword: String){
+    fun checkPassword(newPassword: String?, salt: String, oldPassword: String) : Boolean{
         val encryption = Encryption.getDefault(KEY, salt, bytes)
-        val decrypted = encryption.decryptOrNull(oldpassword)
-        if(newpassword == decrypted){
-            //Todo Success
+        val decrypted = encryption.decryptOrNull(oldPassword)
+        /*if(newPassword == decrypted){
+            return true
         } else {
-            //Todo Failure
-        }
+            return false
+        }*/
+        return(newPassword == decrypted)
     }
 
     fun resetPassword(){

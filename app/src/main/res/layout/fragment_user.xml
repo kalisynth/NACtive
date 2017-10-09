@@ -7,36 +7,70 @@
 
 
     <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/user_setup_name_layout">
+            android:id="@+id/user_setup_info_layout">
 
-        <TextView
-                style="@style/NACLabelText"
-                android:text="@string/setup_name_label_text"
-                android:labelFor="@id/user_setup_name_edittext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/user_setup_name_label"
-                android:layout_weight="1"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/user_setup_name_layout">
 
-        <EditText
-                style="@style/NACEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="@string/setup_name_label_text"
-                android:ems="10"
-                android:id="@+id/user_setup_name_edittext"
-                android:layout_weight="1"/>
+            <TextView
+                    style="@style/NACLabelText"
+                    android:text="@string/setup_name_label_text"
+                    android:labelFor="@id/user_setup_name_edittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user_setup_name_label"
+                    android:layout_weight="1"/>
 
+            <EditText
+                    style="@style/NACEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/setup_name_label_text"
+                    android:ems="10"
+                    android:id="@+id/user_setup_name_edittext"
+                    android:layout_weight="2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/user_setup_password_layout">
+
+            <TextView
+                    style="@style/NACLabelText"
+                    android:text="@string/setup_password_label_text"
+                    android:labelFor="@id/user_setup_name_edittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user_setup_password_label"
+                    android:layout_weight="1"/>
+
+            <EditText
+                    style="@style/NACEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="@string/setup_password_label_text"
+                    android:ems="10"
+                    android:id="@+id/user_setup_password_edittext"
+                    android:layout_weight="2"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <Button
             style="@style/NACActionButton"
             android:text="@string/setup_save_btn_txt"
-            android:layout_below="@id/user_setup_name_layout"
+            android:layout_below="@id/user_setup_info_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/user_setup_save_btn"/>

@@ -37,8 +37,6 @@ class EditExercise : AppCompatActivity(){
         //Wanted to try using fragments, Im no good with fragments, decided to just do it the way I have done it before
         setContentView(R.layout.fragment_exercise_setup)
 
-
-
         // Difficulty Checking and Images
         if(Build.VERSION.SDK_INT > 22) {
             staron = getDrawable(R.drawable.diffstaron)

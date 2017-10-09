@@ -32,7 +32,7 @@ class NACtiveApp : Application(){
     }
 
     val data: KotlinReactiveEntityStore<Persistable> by lazy {
-        val source = DatabaseSource(this, Models.DEFAULT, 1)
+        val source = DatabaseSource(this, Models.DEFAULT, 2)
         source.setTableCreationMode(TableCreationMode.DROP_CREATE)
         KotlinReactiveEntityStore<Persistable>(KotlinEntityDataStore(source.configuration))
     }

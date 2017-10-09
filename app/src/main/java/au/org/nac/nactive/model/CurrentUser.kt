@@ -7,5 +7,7 @@ import com.chibatching.kotpref.KotprefModel
  */
 object CurrentUser : KotprefModel() {
     var name by stringPref()
-    var userId by longPref()
+    var userId by intPref()
+    var isGoogleUser by booleanPref()
+    var googleUUID by stringPref()
 }

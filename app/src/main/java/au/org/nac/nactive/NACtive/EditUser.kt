@@ -3,6 +3,7 @@ package au.org.nac.nactive.NACtive
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -62,20 +63,25 @@ class EditUser : AppCompatActivity(){
         }
 
         saveButton.setOnClickListener {
-            saveNewUser()
+            saveUser()
         }
     }
 
     private fun setNewUser(user: User){
         this.user = user
         nameEditText.setHint(R.string.new_user_name)
-        userInfoText.text = userInfoBuilder(user)
+        if(userInfoText.visibility == View.VISIBLE){
+            userInfoText.visibility = View.GONE
+        }
     }
 
     private fun setReturnUser(user : User){
         this.user = user
         nameEditText.setText(user.name)
         currentUser = user.name
+        if(userInfoText.visibility == View.GONE){
+            userInfoText.visibility = View.VISIBLE
+        }
         userInfoText.text = userInfoBuilder(user)
     }
 
@@ -102,9 +108,10 @@ class EditUser : AppCompatActivity(){
         return userInfoComplete
     }
 
-    private fun saveNewUser(){
+    private fun saveUser(){
         user.name = nameEditText.text.toString()
         user.createdDate = NACiveUtils.getDate(System.currentTimeMillis())
+        user.isGoogleUser = CurrentUser.isGoogleUser
         val observable = if(user.id == 0) data.insert(user) else data.update(user)
                 observable.subscribeOn(Schedulers.single())
                 .observeOn(AndroidSchedulers.mainThread())
