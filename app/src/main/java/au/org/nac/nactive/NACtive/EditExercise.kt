@@ -8,8 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import au.org.nac.nactive.R
 import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.Exercise
-import io.requery.Persistable
-import io.requery.reactivex.KotlinReactiveEntityStore
 import kotlinx.android.synthetic.main.fragment_exercise_setup.*
 import org.jetbrains.anko.image
 
@@ -21,7 +19,6 @@ class EditExercise : AppCompatActivity(){
 
     //Vars
     private var currentUser = CurrentUser.name
-    private lateinit var data : KotlinReactiveEntityStore<Persistable>
     private lateinit var exercise : Exercise
     var levelofdifficulty : Int = 0
     lateinit var staron : Drawable

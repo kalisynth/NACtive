@@ -3,9 +3,12 @@ package au.org.nac.nactive.Utils
 import android.app.FragmentManager
 import android.app.FragmentTransaction
 import au.org.nac.nactive.model.CurrentUser
+import au.org.nac.nactive.model.WorkOutSession
+import au.org.nac.nactive.model.WorkOutSession_
 import com.mcxiaoke.koi.ext.asDateString
 import com.mcxiaoke.koi.ext.asString
 import com.mcxiaoke.koi.ext.dateParse
+import io.objectbox.Box
 
 /**
  * NACtive Utility Class
@@ -38,11 +41,14 @@ object NACiveUtils {
         CurrentUser.isGoogleUser = false
     }
 
-    fun setCurrentUser(name : String?, userId: Int?, isGUser : Boolean?){
+    fun setCurrentUser(name : String?, userId: Long?, isGUser : Boolean?){
         CurrentUser.name = name!!
         CurrentUser.userId = userId!!
         CurrentUser.isGoogleUser = isGUser!!
     }
 
-
+    fun returnWorkOutName(id: Long, box : Box<WorkOutSession>) : String?{
+        val workOutQuery = box.query().equal(WorkOutSession_.id, id).build()
+        return workOutQuery.findUnique()?.name
+    }
 }

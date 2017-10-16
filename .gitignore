@@ -3,7 +3,7 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
-/app/src/main/java/au/org/nac/nactive/NACtive/google-services.json
+/app/google-services.json
 .DS_Store
 /build
 /captures

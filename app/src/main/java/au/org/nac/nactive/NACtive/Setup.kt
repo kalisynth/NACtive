@@ -6,35 +6,36 @@ import android.os.Bundle
 import android.util.Log
 import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.R
+import au.org.nac.nactive.Utils.LoginUtils
 import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.User
-import io.requery.Persistable
-import io.requery.kotlin.eq
-import io.requery.reactivex.KotlinReactiveEntityStore
+import au.org.nac.nactive.model.User_
+import io.objectbox.Box
+import io.objectbox.query.Query
 import kotlinx.android.synthetic.main.activity_setup.*
 
 class Setup : AppCompatActivity() {
 
     private var currentUser = CurrentUser.name
-    private lateinit var data : KotlinReactiveEntityStore<Persistable>
-    private lateinit var user : User
+    private var currentUserId = CurrentUser.userId
+    private var user : User? = User()
     private var TAG = "SETUP"
-    private var userId : Int = 0
+    private var userId : Long = 0
+
+    private lateinit var userBox : Box<User>
+    private lateinit var userQuery : Query<User>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setup)
 
-        data = (application as NACtiveApp).data
+        userBox = (application as NACtiveApp).boxStore.boxFor(User::class.java)
 
-        if(currentUser.isEmpty()){
-            userId = 0
-            Log.i(TAG, "CurrentUser = Empty")
-        } else {
+        if(currentUserId != userId){
             try{
-                user = data.select(User::class).where(User::name.eq(currentUser)).get().single()
-                userId = user.id
-                Log.i(TAG, "User Set to: " + user.name)
+                userQuery = userBox.query().equal(User_.id, currentUserId).build()
+                user = userQuery.findUnique()
+                Log.i(TAG, "User Set to: " + user?.id)
             } catch(e: NoSuchElementException) {
                 Log.i(TAG, "User Collection is Empty")
                 userId = 0
@@ -43,6 +44,7 @@ class Setup : AppCompatActivity() {
 
         setup_user_btn.setOnClickListener {
             val intent = Intent(this, EditUser::class.java)
+            intent.putExtra("EXTRA_PERSON_ID", userId)
             startActivity(intent)
         }
 

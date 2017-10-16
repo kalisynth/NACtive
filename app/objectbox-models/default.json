@@ -1,0 +1,206 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:7977951158355589466",
+      "lastPropertyId": "10:824848015228546290",
+      "name": "Exercise",
+      "properties": [
+        {
+          "id": "1:5640998603578178497",
+          "name": "id"
+        },
+        {
+          "id": "2:3677775891226590463",
+          "name": "name"
+        },
+        {
+          "id": "3:4875296231065085428",
+          "name": "description"
+        },
+        {
+          "id": "4:6759505694792445482",
+          "name": "repetitions"
+        },
+        {
+          "id": "5:1108613190816840166",
+          "name": "maxTime"
+        },
+        {
+          "id": "6:5736766013757762723",
+          "name": "minTime"
+        },
+        {
+          "id": "7:6583103869506209545",
+          "name": "avgTime"
+        },
+        {
+          "id": "8:6836129677316293192",
+          "name": "difficultylevel"
+        },
+        {
+          "id": "9:7489083545756646872",
+          "name": "experience"
+        },
+        {
+          "id": "10:824848015228546290",
+          "name": "overallTotal"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:777064203352295371",
+      "lastPropertyId": "5:2841887549988361024",
+      "name": "ExerciseStats",
+      "properties": [
+        {
+          "id": "1:2726936001704159787",
+          "name": "id"
+        },
+        {
+          "id": "2:6794889170668262105",
+          "name": "time"
+        },
+        {
+          "id": "3:2746335430561011080",
+          "name": "repetitions"
+        },
+        {
+          "id": "4:2395704628776558939",
+          "name": "totalDone"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:3612750483136805023",
+      "lastPropertyId": "10:7057796160350849741",
+      "name": "User",
+      "properties": [
+        {
+          "id": "1:1969738421219709733",
+          "name": "id"
+        },
+        {
+          "id": "2:8080141284635332863",
+          "name": "name"
+        },
+        {
+          "id": "3:1336607884554219746",
+          "name": "createdDate"
+        },
+        {
+          "id": "7:706762530764084892",
+          "name": "googleUID"
+        },
+        {
+          "id": "8:1381766346761810797",
+          "name": "nextWorkOutId"
+        },
+        {
+          "id": "9:8817756640477782649",
+          "name": "currentWorkOutId"
+        },
+        {
+          "id": "10:7057796160350849741",
+          "name": "previousWorkOutId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:6636590212421992845",
+      "lastPropertyId": "8:3642452748836358013",
+      "name": "WorkOutSession",
+      "properties": [
+        {
+          "id": "1:3857462545141165804",
+          "name": "id"
+        },
+        {
+          "id": "2:6468146895910770385",
+          "name": "name"
+        },
+        {
+          "id": "3:2381370903251502734",
+          "name": "frequencySchedule"
+        },
+        {
+          "id": "4:160213731272589421",
+          "name": "maxTime"
+        },
+        {
+          "id": "5:4489190406768244566",
+          "name": "minTime"
+        },
+        {
+          "id": "6:7821071317856057419",
+          "name": "avgTime"
+        },
+        {
+          "id": "7:3036400654734651893",
+          "name": "overallTotal"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:3388072544650647665",
+      "lastPropertyId": "4:8676671968816290017",
+      "name": "WorkOutStats",
+      "properties": [
+        {
+          "id": "1:5853070421833382468",
+          "name": "id"
+        },
+        {
+          "id": "2:3004188176148097065",
+          "name": "time"
+        },
+        {
+          "id": "3:6084049083201805957",
+          "name": "completed"
+        },
+        {
+          "id": "4:8676671968816290017",
+          "name": "exerciseIdStoppedOn"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "6:3388072544650647665",
+  "lastIndexId": "3:1403739634060207684",
+  "lastRelationId": "2:8293265210604238457",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [
+    6731195234125616125
+  ],
+  "retiredIndexUids": [
+    822579159635584643,
+    1403739634060207684,
+    3986370092810963396
+  ],
+  "retiredPropertyUids": [
+    2841887549988361024,
+    3642452748836358013,
+    7549780289964529083,
+    8545699605549178824,
+    6866189589433146699,
+    6691973077338438717,
+    106235764153974410,
+    3130334405888490394,
+    5906249414506499741,
+    4640554741307510076
+  ],
+  "retiredRelationUids": [
+    5017573604207577282,
+    8293265210604238457
+  ],
+  "version": 1
+}

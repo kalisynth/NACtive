@@ -11,13 +11,11 @@ import android.widget.EditText
 import android.widget.Toast
 import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.R
-import au.org.nac.nactive.Utils.NACiveUtils
 import au.org.nac.nactive.Utils.NACiveUtils.clearUser
-import au.org.nac.nactive.Utils.NACiveUtils.setCurrentUser
-import au.org.nac.nactive.Utils.PasswordUtil
+import au.org.nac.nactive.Utils.LoginUtils
 import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.User
-import au.org.nac.nactive.model.UserEntity
+import au.org.nac.nactive.model.User_
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -26,26 +24,30 @@ import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.common.api.Status
-import io.requery.Persistable
-import io.requery.kotlin.eq
-import io.requery.reactivex.KotlinReactiveEntityStore
+import io.objectbox.Box
+import io.objectbox.query.Query
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks{
 
     private var TAG = "MainAct"
-    private lateinit var data : KotlinReactiveEntityStore<Persistable>
-    private lateinit var user : User
+    private lateinit var userName : String
+    private lateinit var userGoogleIdToken : String
     private lateinit var googleApiClient : GoogleApiClient
     private lateinit var googleSignInOptions : GoogleSignInOptions
+
+    //Buttons
     private lateinit var gSignInBtn : SignInButton
     private lateinit var ngSignInBtn : Button
     private lateinit var signOutBtn : Button
     private lateinit var revokeBtn : Button
 
+    //ObjectBox
+    private lateinit var userBox : Box<User>
+    private lateinit var userQuery : Query<User>
+
     private var RC_SIGN_IN = 9001
-    private var acct : GoogleSignInAccount? = null
+    private var acct : GoogleSignInAccount? = null //Google Account
 
     companion object {
         internal val EXTRA_USER_ID = "userId"
@@ -55,139 +57,67 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        data = (application as NACtiveApp).data
+        //Set ObjectBox
+        userBox = (application as NACtiveApp).boxStore.boxFor(User::class.java)
 
+        //Google Sign in Builder
         googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build()
 
+        //Build Google Api
         initGoogleApi()
 
+        //Assign Buttons from Layout
         gSignInBtn = main_google_signin_btn
         ngSignInBtn = main_login_btn
         signOutBtn = main_signout_btn
         revokeBtn = revoke_access_btn
 
+        //Setup Button
         main_setup_btn.setOnClickListener {
              val intent = Intent(this, Setup::class.java)
             startActivity(intent)
         }
 
+        //Exercise Button
         main_exercise_btn.setOnClickListener {
             val intent = Intent(this, ExercisesActivity::class.java)
             startActivity(intent)
         }
 
+        //Information Button
         main_information_btn.setOnClickListener{
             val intent = Intent(this, Information::class.java)
             startActivity(intent)
         }
 
+        //Sign In Button
         gSignInBtn.setOnClickListener {
             googleSignIn()
         }
 
-        ngSignInBtn.setOnClickListener {
-            signIn()
-        }
-
+        //Sign Out Button
         signOutBtn.setOnClickListener {
             signOut(CurrentUser.isGoogleUser)
         }
 
+        //Revoke Button
         revokeBtn.setOnClickListener {
             revokeGoogleAccess()
         }
     }
 
     private fun googleSignIn(){
+        //Sign in to Google
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         startActivityForResult(signInIntent, RC_SIGN_IN)
-
-    }
-
-    private fun signIn(){
-        alert {
-            title = "Sign In"
-            var editUserName : EditText? = null
-            var editPassword : EditText? = null
-
-            customView {
-                verticalLayout {
-                    layoutParams = ViewGroup.LayoutParams(wrapContent, wrapContent)
-                    linearLayout {
-                        textView().text = "Name: "
-                        editUserName = editText {
-                            hint = "John Smith"
-                        }
-                        textView().text = "Password: "
-                        editPassword = editText{
-                            hint = "Password123"
-                        }
-                    }
-                    linearLayout{
-                        button {
-                            text = "Sign In"
-                            signInUser("${editUserName!!.text}", "${editPassword!!.text}", false)
-                            Log.d(TAG, "Sign In: " + "${editUserName!!.text}" + "${editPassword!!.text}")
-                        }
-                        button {
-                            text = "New User"
-                            newUser()
-                        }
-                    }
-                }
-            }
-        }.show()
-    }
-
-    private fun signInUser(name : String?, password : String?, isGoogleUser: Boolean){
-        var uName : String
-        var uId = 0
-        var isNewUser = false
-        try{
-            user = data.select(User::class).where(UserEntity::name.eq(name)).get().single()
-            uName = user.name
-            uId = user.id
-        } catch (e: RuntimeException){
-            Log.e(TAG, "Exception: " + e)
-            uName = acct!!.displayName.toString()
-            isNewUser = true
-        }
-        if(!isGoogleUser){
-            if(PasswordUtil.checkPassword(password, user.sodium, user.password)){
-                //Success Login
-                Toast.makeText(this, "Welcome Back " + user.name, Toast.LENGTH_SHORT).show()
-                setCurrentUser(uName, uId, false)
-            } else {
-                //Failure Login
-                Log.e(TAG, "Non Google Login Attempt Failed")
-                signInFail()
-            }
-        } else {
-            setCurrentUser(uName, uId, true)
-            Toast.makeText(this, "Successfully Signed in as: " + acct!!.displayName, Toast.LENGTH_LONG).show()
-            if(acct!!.id!=null){
-                val gId = acct!!.id.toString()
-                CurrentUser.googleUUID = gId
-                if(isNewUser){
-                    Log.i(TAG, "Inserting New User: " + acct!!.givenName.toString())
-                    user = UserEntity()
-                    user.name = acct!!.givenName.toString()
-                    user.createdDate = NACiveUtils.getDate(System.currentTimeMillis())
-                    user.isGoogleUser = true
-                    user.googleUUID = acct!!.id.toString()
-                    user.password = acct!!.displayName.toString()
-                    data.insert(user)
-                    Log.i(TAG, "User Id: " + user.id)
-                }
-            }
-        }
-        updateUi(true)
     }
 
     private fun newUser(){
+        //Open User Editor
         val intent = Intent(this, EditUser::class.java)
+        CurrentUser.userId = 0
         startActivity(intent)
     }
 
@@ -213,11 +143,29 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         //Get Google Sign In Result and Handle it
         val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data1)
         if(result.isSuccess){
-            acct = result.signInAccount
-            signInUser(acct!!.givenName, acct!!.displayName, true)
+            acct = result.signInAccount //Get Account from Result
+            userName = acct!!.displayName.toString() //Set UserName
+            userGoogleIdToken = acct!!.idToken.toString() //Set GoogleId Token
+
+            try{
+                userQuery = userBox.query().equal(User_.name, userName).build()
+                //Return User
+            } catch(e: NullPointerException){
+                Log.e(TAG, "Null Pointer Exception" + e)
+                //is New User
+            }
+
+            val signingInUser = userQuery.findUnique() //Get User
+
+            if(signingInUser != null && LoginUtils.isNewUser(signingInUser.name, userBox)){
+                LoginUtils.googleUserSignIn(0, userName, userGoogleIdToken, userBox)
+                newUser()
+            } else if(signingInUser != null){
+                LoginUtils.googleUserSignIn(signingInUser.id, userName, userGoogleIdToken, userBox)
+            }
         } else {
             Log.e(TAG, "Google Login attempt Failed Intent: " + data1 + "resultCode: " + resultCode)
-            signInFail()
+            signInFail() //Sign in Fail
         }
     }
 
@@ -258,7 +206,7 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
                 }
             }
         } else {
-            user = UserEntity()
+            //user = UserEntity()
             clearUser()
         }
         updateUi(false)

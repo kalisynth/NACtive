@@ -6,13 +6,15 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'io.objectbox'
+
 kapt {
     generateStubs = true
 }
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "au.org.nac.nactive"
         minSdkVersion 19
@@ -47,7 +49,7 @@ def archVersion = '1.0.0-alpha8'
 def daggerVersion = '2.11'
 def anko_version = "0.10.1"
 def kotlin_version = '1.1.51'
-def requery_version = '1.4.0'
+def objectBox_version = '1.0.1'
 def rxKotlin_version = '2.0.3'
 
 dependencies {
@@ -90,11 +92,9 @@ dependencies {
     compile "com.chibatching.kotpref:kotpref:2.1.2"
     compile "com.chibatching.kotpref:enum-support:2.1.2"
 
-    //Requery
-    compile "io.requery:requery:$requery_version"
-    compile "io.requery:requery-kotlin:$requery_version"
-    compile "io.requery:requery-android:$requery_version"
-    kapt "io.requery:requery-processor:$requery_version"
+    //objectbox
+    compile "io.objectbox:objectbox-android:$objectboxVersion"
+    compile "io.objectbox:objectbox-kotlin:$objectboxVersion"
 
     compile 'com.mcxiaoke.koi:core:0.5.4'
 
