@@ -43,7 +43,7 @@ android {
 }
 
 def supportLibVersion = '26.1.0'
-def googleServicesVersion = '11.4.0'
+def googleServicesVersion = '11.4.2'
 def encryptionVersion = '2.0.1'
 def archVersion = '1.0.0-alpha8'
 def daggerVersion = '2.11'

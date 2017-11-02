@@ -91,10 +91,9 @@ class EditWorkOut : AppCompatActivity() {
             exerciseList = workOut!!.exercises as MutableList<Exercise>
         }
 
-        setUpView()
-
         exercisesQuery = exerciseBox.query().order(Exercise_.name).build()
         updateExercises()
+        setUpView()
     }
 
     private fun setUpView(){
@@ -153,6 +152,10 @@ class EditWorkOut : AppCompatActivity() {
         }
 
         bpSpinner.adapter = bpAdapter
+
+        val defpos = bpAdapter.getPosition(BodyParts.DEFAULT)
+
+        bpSpinner.setSelection(defpos)
 
         bpSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -283,6 +286,7 @@ class EditWorkOut : AppCompatActivity() {
 
     private fun getExerciseBodyParts(exerciseList : List<Exercise>, bodyPart : BodyParts) : List<Exercise>{
         val listSize = exerciseList.size
+        Log.d(TAG, "Getting Body Parts List Size:" + listSize)
         val i = 0
         val newList = mutableListOf<Exercise>()
         while(i<listSize){
@@ -292,6 +296,7 @@ class EditWorkOut : AppCompatActivity() {
             }
         }
 
+        Log.d(TAG, "NewList: " +  newList)
         return newList
     }
 }
