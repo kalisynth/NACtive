@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="@color/mainbgcolor"
+                tools:context="au.org.nac.nactive.fragments.HomeFragment">
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/newlogonb"
+            android:layout_below="@id/home_FRAGMENT_TITLE_TEXT"
+            android:id="@+id/logoImage"
+            android:layout_marginTop="43dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/naclogocd"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nactivemotto"
+            android:gravity="center"
+            android:id="@+id/home_FRAGMENT_TITLE_TEXT"
+            style="@style/Base.TextAppearance.AppCompat.Headline"/>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/lrgMargin"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/home_FRAGMENT_TITLE_TEXT">
+
+        <Button
+                style="@style/NACNavButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_EXERCISE_BTN"
+                android:text="@string/exercises_activity_btn_text"
+                />
+
+        <Button
+                style="@style/NACNavButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_SETUP_BTN"
+                android:text="@string/setup_btn_text"/>
+
+        <Button
+                style="@style/NACNavButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/information_btn_text"
+                android:id="@+id/home_INFO_BTN"/>
+
+        <com.google.android.gms.common.SignInButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_GOOGLE_SIGNIN_BTN"/>
+
+        <Button
+                style="@style/NACActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_SIGNOUT_BTN"
+                android:visibility="gone"/>
+
+        <Button
+                style="@style/NACActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/home_REVOKE_BTN"
+                android:visibility="gone"/>
+    </LinearLayout>
+
+</RelativeLayout>

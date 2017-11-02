@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="defaultreps">5</integer>
+    <integer name="defaultlevel">5</integer>
+    <integer name="level1experience">5</integer>
+    <integer name="level2experience">10</integer>
+    <integer name="level3experience">15</integer>
+    <integer name="experience2Level">100</integer>
+</resources>

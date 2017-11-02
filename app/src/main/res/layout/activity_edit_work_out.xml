@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="au.org.nac.nactive.NACtive.EditWorkOut"
+        tools:layout_editor_absoluteY="89dp">
+
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/workoutdetailslayout"
+            android:layout_toEndOf="@+id/workOutButtonBar"
+            android:layout_alignEnd="@+id/workoutdetailslayout"
+            android:layout_centerInParent="true"
+            android:id="@+id/workOutLists">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            <TextView
+                    android:text="@string/wsetup_add_exercises"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wsaelabel"/>
+
+            <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wExercisesRV"
+                    tools:layout_editor_absoluteY="260dp"
+                    tools:layout_editor_absoluteX="279dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0">
+
+            <TextView
+                    android:text="@string/wSetup_current_exercises"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wscelabel"/>
+
+            <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wSetup_Current_Exercises"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/workoutdetailslayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            tools:layout_editor_absoluteY="80dp"
+            tools:layout_editor_absoluteX="364dp">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:id="@+id/wSetup_name_layout"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:text="@string/setup_name_label_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wSetup_name_textView"
+                    android:layout_weight="0"/>
+
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/setup_name_label_text"
+                    android:ems="10"
+                    android:id="@+id/wSetup_name_editText"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:id="@+id/wSetup_BodyPart_Layout"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:text="@string/area_of_focus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wAoFText"
+                    android:layout_weight="0"/>
+
+            <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wAoFSpinner"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:text="@string/times_complete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wSetup_Time_Complete_Label"
+                    android:layout_weight="0"/>
+
+            <TextView
+                    android:text="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wSetup_Time_Complete_Value_textView"
+                    android:layout_weight="1"/>
+
+            <TextView
+                    android:text="@string/minTime_label_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wSetup_minTime_Label"
+                    android:layout_weight="0"/>
+
+            <TextView
+                    android:text="00:00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wSetup_minTime_Value_textView"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_above="@+id/wCalendar"
+            android:id="@+id/wFreq_RadioGroup"
+            tools:layout_editor_absoluteY="33dp"
+            android:layout_alignParentEnd="true"
+            tools:layout_editor_absoluteX="1007dp">
+
+        <RadioButton
+                android:text="@string/wFrequency_Always"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wFreq_Always_RB"
+                android:layout_weight="0"/>
+
+        <RadioButton
+                android:text="@string/wFrequency_Scheduled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wFreq_Scheduled_RB"
+                android:layout_weight="0"/>
+
+        <RadioButton
+                android:text="@string/wFrequency_Random"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wFreq_Random_RB"
+                android:layout_weight="0"/>
+    </RadioGroup>
+
+    <CalendarView
+            android:layout_width="637dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/wCalendar"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            tools:layout_editor_absoluteY="80dp"
+            android:layout_toEndOf="@+id/workOutLists"
+            tools:layout_editor_absoluteX="640dp"/>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            tools:layout_editor_absoluteY="507dp"
+            tools:layout_editor_absoluteX="56dp"
+            android:id="@+id/workOutButtonBar">
+
+        <Button
+                android:text="@string/wSetup_save_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/wSetup_Save_btn"/>
+
+        <Button
+                android:text="@string/wSetup_update_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/wSetup_Update_btn"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -12,5 +12,5 @@ data class WorkOutStats (
     @Id var id: Long = 0,
     val time: Long = 0,
     val completed: Boolean = false,
-    val exerciseIdStoppedOn : String = ""
+    val exerciseIdStoppedOn : String? = ""
 )

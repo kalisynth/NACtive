@@ -6,11 +6,16 @@
 
     <!-- NACTIVITY Colors -->
     <color name="mainbgcolor">#40abcf</color>
-    <color name="navbuttoncolor">#f2f692</color>
+    <color name="navendbuttoncolor">#f2fa2d</color>
+    <color name="navmidbuttoncolor">#f2f692</color>
+    <color name="navstartbuttoncolor">#f6ff2b</color>
     <color name="nacblack">#000000</color>
     <color name="nacwhite">#ffffff</color>
     <color name="confirmbtncolor">#49d84b</color>
     <color name="listbgcolor">#beecfc</color>
     <color name="listtextcolor">#3bcb3d</color>
-    <color name="actionbtncolor">#d94c9e</color>
+    <color name="actionstartbtncolor">#d94c9e</color>
+    <color name="actionmidbtncolor">#f48ec9</color>
+    <color name="actionendbtncolor">#d23691</color>
+
 </resources>

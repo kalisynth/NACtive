@@ -26,13 +26,14 @@ import javax.inject.Inject
 class EditUser : AppCompatActivity(){
 
     //Vars
-    private var currentUser : String = CurrentUser.name
+    private var currentUser : String? = CurrentUser.name
     private var user : User? = User()
     private lateinit var nameEditText : EditText
     private lateinit var saveButton : Button
     private lateinit var userInfoText : TextView
     private var TAG = "USER_EDITOR"
 
+    //Dagger Injection
     @Inject
     lateinit var userBox : Box<User>
     private lateinit var userQuery : Query<User>
@@ -48,39 +49,45 @@ class EditUser : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_user)
 
-        //
+        //INIT UI
 
         nameEditText = user_setup_name_edittext
         saveButton = user_setup_save_btn
         userInfoText = user_setup_info
 
+        //Get User ID
         val personId = intent.getLongExtra(EXTRA_PERSON_ID, -1)
         Log.i(TAG, "Checking User Status")
 
+        //Check if New User
         if(personId < 1){
-            //TODO New User
             setNewUser(user)
             Log.i(TAG, "New User")
         } else {
             userQuery = userBox.query().equal(User_.id, personId).build()
-           setReturnUser(userQuery.findUnique())
+            val returnUser = userQuery.findUnique() as User
+           setReturnUser(returnUser)
         }
 
+        //Set OnClickListener
         saveButton.setOnClickListener {
             saveUser()
         }
     }
 
     private fun setNewUser(user: User?){
+        //Set New User
         this.user = user
-        nameEditText.setHint(R.string.new_user_name)
-        if(userInfoText.visibility == View.VISIBLE){
-            userInfoText.visibility = View.GONE
+        nameEditText.setText(CurrentUser.name)
+            nameEditText.setHint(R.string.new_user_name)
+            if(userInfoText.visibility == View.VISIBLE){
+                userInfoText.visibility = View.GONE
+            }
         }
-    }
 
-    private fun setReturnUser(user : User?){
-        this.user = user!!
+    private fun setReturnUser(user : User){
+        //Return User
+        this.user = user
         try{
             nameEditText.setText(user.name)
             currentUser = user.name
@@ -95,10 +102,11 @@ class EditUser : AppCompatActivity(){
     }
 
     private fun userInfoBuilder(user: User) : String{
+        //Build Information Display
         this.user = user
         val userInfoComplete : String
         val userInfoStart = getString(R.string.user_info_start)
-        var userCreationDate = getString(R.string.user_info_creation_date) + user.createdDate
+        val userCreationDate = getString(R.string.user_info_creation_date) + user.createdDate
 
         val userCurrentWO = getString(R.string.user_info_current_session) +
                 NACiveUtils.returnWorkOutName(user.currentWorkOutId, workOutBox) //Get Current WorkOut
@@ -106,10 +114,6 @@ class EditUser : AppCompatActivity(){
                 NACiveUtils.returnWorkOutName(user.previousWorkOutId, workOutBox) //Get Previous WorkOut
         val userNextWO = getString(R.string.user_info_next_session) +
                 NACiveUtils.returnWorkOutName(user.nextWorkOutId, workOutBox) //Get Next WorkOut
-
-        if(user.createdDate == ""){
-            userCreationDate = getString(R.string.user_info_creation_date) + " Not Available"
-        }
 
         userInfoComplete = userInfoStart + "\n" +
                 userCreationDate + "\n" +

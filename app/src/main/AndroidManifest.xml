@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="au.org.nac.nactive">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
             android:name=".NACtiveApp"
             android:allowBackup="true"
@@ -33,6 +36,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".NACtive.EditWorkOut">
+        </activity>
+        <activity android:name=".NACtive.UserDiary">
         </activity>
     </application>
 

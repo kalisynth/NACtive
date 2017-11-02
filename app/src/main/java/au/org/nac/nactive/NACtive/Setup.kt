@@ -42,14 +42,15 @@ class Setup : AppCompatActivity() {
             }
         }
 
-        setup_user_btn.setOnClickListener {
+        /*setup_user_btn.setOnClickListener {
             val intent = Intent(this, EditUser::class.java)
             intent.putExtra("EXTRA_PERSON_ID", userId)
             startActivity(intent)
-        }
+        }*/
 
         setup_session_btn.setOnClickListener {
-            //TODO Setup Session Editor
+            val intent = Intent(this, EditWorkOut::class.java)
+            startActivity(intent)
         }
 
         setup_exercise_btn.setOnClickListener {

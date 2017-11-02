@@ -2,6 +2,7 @@ package au.org.nac.nactive.inject
 
 import android.content.Context
 import au.org.nac.nactive.NACtiveApp
+import au.org.nac.nactive.model.Exercise
 import au.org.nac.nactive.model.User
 import au.org.nac.nactive.model.WorkOutSession
 import dagger.Module
@@ -23,4 +24,7 @@ import javax.inject.Singleton
 
     @Provides
     @Singleton fun provideWorkOutBox() : Box<WorkOutSession> = app.boxStore.boxFor(WorkOutSession::class.java) as Box<WorkOutSession>
+
+    @Provides
+    @Singleton fun provideExerciseBox() : Box<Exercise> = app.boxStore.boxFor(Exercise::class.java) as Box<Exercise>
 }

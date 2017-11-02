@@ -13,6 +13,7 @@ import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.R
 import au.org.nac.nactive.Utils.NACiveUtils.clearUser
 import au.org.nac.nactive.Utils.LoginUtils
+import au.org.nac.nactive.Utils.NACiveUtils
 import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.User
 import au.org.nac.nactive.model.User_
@@ -27,6 +28,9 @@ import com.google.android.gms.common.api.Status
 import io.objectbox.Box
 import io.objectbox.query.Query
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.yesButton
 
 class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks{
 
@@ -75,22 +79,27 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         revokeBtn = revoke_access_btn
 
         //Setup Button
-        main_setup_btn.setOnClickListener {
-             val intent = Intent(this, Setup::class.java)
+        main_setup_btn.setOnClickListener {val intent = Intent(this,
+                Setup::class.java)
             startActivity(intent)
         }
 
         //Exercise Button
-        main_exercise_btn.setOnClickListener {
-            val intent = Intent(this, ExercisesActivity::class.java)
+        main_exercise_btn.setOnClickListener {val intent = Intent(this,
+                ExercisesActivity::class.java)
             startActivity(intent)
         }
 
         //Information Button
-        main_information_btn.setOnClickListener{
-            val intent = Intent(this, Information::class.java)
+        main_information_btn.setOnClickListener{val intent = Intent(this,
+                Information::class.java)
             startActivity(intent)
         }
+
+        //User Diary Button
+        main_user_diary_btn.setOnClickListener { val intent = Intent(this,
+                UserDiary::class.java)
+        startActivity(intent)}
 
         //Sign In Button
         gSignInBtn.setOnClickListener {
@@ -99,7 +108,9 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
 
         //Sign Out Button
         signOutBtn.setOnClickListener {
-            signOut(CurrentUser.isGoogleUser)
+            LoginUtils.userSignOut()
+            updateUi(false)
+            Log.i(TAG, "User Signed Out")
         }
 
         //Revoke Button
@@ -115,10 +126,42 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     }
 
     private fun newUser(){
-        //Open User Editor
-        val intent = Intent(this, EditUser::class.java)
-        CurrentUser.userId = 0
-        startActivity(intent)
+        val intent = Intent(this, EditWorkOut::class.java)
+        val user = User()
+        user.name = CurrentUser.name
+        user.createdDate = NACiveUtils.getDate(System.currentTimeMillis())
+        user.googleUID = CurrentUser.googleUUID
+        user.userLevel = 1
+        user.userExperience = 0
+        userBox.put(user)
+        Log.d(TAG, "User Object Id: " + user.id)
+        alert("Looks like this is your first time here in NACtive, would you like to set up" +
+                " your first work out?", "Hello " + user.name) {
+            yesButton {
+                startActivity(intent)
+            }
+            noButton { //Do Nothing
+            }
+        }.show()
+        updateUi(true)
+    }
+
+    private fun returnUser(user : User){
+        val intent = Intent(this, ExercisesActivity::class.java)
+        val exp2lvl = R.integer.experience2Level - user.userExperience
+        val nextLevel = user.userLevel + 1
+        alert("Welcome Back " + CurrentUser.name + " You are currently Level: "
+                + user.userLevel + " you have " + user.userExperience + " experience and " + exp2lvl
+                + "experience to go till level " + nextLevel + " would you like to start your Work Out?",
+                "Signed in successfully"){
+            yesButton {
+                startActivity(intent) //Start Exercises
+            }
+            noButton {
+                //do nothing
+            }
+        }.show()
+        updateUi(true)
     }
 
     private fun initGoogleApi(){
@@ -139,7 +182,8 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
     }
 
     private fun handleGoogleSignInResult(resultCode: Int, data1: Intent?){
-        Log.d(TAG, "handleSignInResult: " + resultCode + Auth.GoogleSignInApi.getSignInResultFromIntent(data1))
+        Log.d(TAG, "handleSignInResult: " + resultCode +
+                Auth.GoogleSignInApi.getSignInResultFromIntent(data1))
         //Get Google Sign In Result and Handle it
         val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data1)
         if(result.isSuccess){
@@ -147,21 +191,34 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
             userName = acct!!.displayName.toString() //Set UserName
             userGoogleIdToken = acct!!.idToken.toString() //Set GoogleId Token
 
-            try{
-                userQuery = userBox.query().equal(User_.name, userName).build()
-                //Return User
-            } catch(e: NullPointerException){
-                Log.e(TAG, "Null Pointer Exception" + e)
-                //is New User
-            }
+            userQuery = userBox.query().equal(User_.name, userName).build()
 
             val signingInUser = userQuery.findUnique() //Get User
+            val userNameCheck : String?
 
-            if(signingInUser != null && LoginUtils.isNewUser(signingInUser.name, userBox)){
-                LoginUtils.googleUserSignIn(0, userName, userGoogleIdToken, userBox)
+            Log.i(TAG, "User Query Result: " + signingInUser?.name + " acct name: " + userName)
+
+            if(signingInUser?.name == null){
+                userNameCheck = acct?.displayName.toString()
+                Log.d(TAG, "UserName: acct, " + userNameCheck)
+            } else {
+                userNameCheck = signingInUser.name
+                Log.d(TAG, "UserName: signInUser, " + userNameCheck)
+            }
+
+            Log.d(TAG, "Is New User? " + LoginUtils.isNewUser(userNameCheck, userBox))
+
+            if(LoginUtils.isNewUser(userNameCheck, userBox)){
+                Log.i(TAG, "New Account Name: " + userNameCheck)
+                CurrentUser.name = userNameCheck.toString()
+                CurrentUser.isGoogleUser = true
+                CurrentUser.googleUUID = acct?.id.toString()
+                Log.d(TAG, "New User GoogleId: " + acct?.id.toString())
                 newUser()
-            } else if(signingInUser != null){
+            } else if(signingInUser?.name != null){
                 LoginUtils.googleUserSignIn(signingInUser.id, userName, userGoogleIdToken, userBox)
+                Log.d(TAG, "Return User")
+                returnUser(signingInUser)
             }
         } else {
             Log.e(TAG, "Google Login attempt Failed Intent: " + data1 + "resultCode: " + resultCode)
@@ -178,38 +235,18 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         if(signedIn){
             //Update UI to signing out
             gSignInBtn.visibility = View.GONE
-            ngSignInBtn.visibility = View.GONE
+            //ngSignInBtn.visibility = View.GONE
             signOutBtn.visibility = View.VISIBLE
             revokeBtn.visibility = View.VISIBLE
             Log.i(TAG, "User Signed In")
         } else {
             //update UI to signing in
             gSignInBtn.visibility = View.VISIBLE
-            ngSignInBtn.visibility = View.VISIBLE
+            //ngSignInBtn.visibility = View.VISIBLE
             signOutBtn.visibility = View.GONE
             revokeBtn.visibility = View.GONE
             Log.i(TAG, "User Signed Out")
         }
-    }
-
-    private fun signOut(isGoogleUser: Boolean){
-        if(isGoogleUser == CurrentUser.isGoogleUser){
-            if(googleApiClient.isConnected){
-                Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback {
-                    ResultCallback<Status>{
-                        @Override
-                        fun onResult(status: Status){
-                            //do Something
-                            Log.i(TAG, "User Signed out" + status)
-                        }
-                    }
-                }
-            }
-        } else {
-            //user = UserEntity()
-            clearUser()
-        }
-        updateUi(false)
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {

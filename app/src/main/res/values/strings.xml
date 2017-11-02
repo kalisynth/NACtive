@@ -10,10 +10,12 @@
     <string name="exercise_stop_btn_text">Stop</string>
     <string name="exercise_finish_btn_text">Finish</string>
     <string name="information_guides_btn_text">Exercise Guide</string>
+    <string name="main_userdiary_btn_text">Diary</string>
     <string name="information_faq_btn_text">FAQ</string>
     <string name="information_has_btn_text">Health and Safety</string>
     <string name="information_contacts_btn_text">Contacts</string>
     <string name="setup_user_btn_text">User</string>
+    <string name="setup_app_settings_btn_text">Options</string>
     <string name="setup_session_btn_text">Exercise Routines</string>
     <string name="setup_exercise_btn_text">Exercise</string>
     <string name="setup_save_btn_txt">Save</string>
@@ -21,6 +23,12 @@
     <string name="sign_out_btn_txt">Sign Out</string>
     <string name="nongooglesignin_btn_txt">Sign In(Without Google)</string>
     <string name="revoke_access_btn_txt">Revoke Google Access</string>
+    <string name="eSetup_save_btn">Save as new exercise</string>
+    <string name="wSetup_save_btn">Save as new Work Out</string>
+    <string name="wSetup_update_btn">Update Work Out</string>
+    <string name="eSetup_update_btn">Update Exercise</string>
+    <string name="eSetup_delete_btn">Delete Exercise</string>
+    <string name="eSetup_addSteps_btn">Add Step</string>
 
     <!-- Text -->
     <string name="nactivemotto">Let\'s get NACTIVE</string>
@@ -30,6 +38,9 @@
     <string name="setup_difficulty_label_text">Difficulty: </string>
     <string name="setup_repetitions_label_text">Repetitions: </string>
     <string name="setup_videolocation_label_text">Video Location: </string>
+    <string name="times_complete">Completed: </string>
+    <string name="eSetup_steps_label_text">Steps: </string>
+    <string name="minTime_label_text">Fastest Time: </string>
     <string name="new_user_name">Please enter your name here</string>
     <string name="user_info_start">User Info</string>
     <string name="user_info_creation_date">Creation Date: </string>
@@ -38,10 +49,26 @@
     <string name="user_info_current_session">Current Session: </string>
     <string name="setup_name_edit_hint">Enter Name Here</string>
     <string name="setup_desc_edit_hint">Enter Description Here</string>
+    <string name="wsetup_add_exercises">Add Exercises</string>
+    <string name="wSetup_current_exercises">Current Exercises</string>
+    <string name="area_of_focus">Area of Focus</string>
+    <string name="wFrequency_Random">Random</string>
+    <string name="wFrequency_Scheduled">Scheduled</string>
+    <string name="wFrequency_Always">Always</string>
 
     <!-- Content Description -->
     <string name="naclogocd">NAC Logo</string>
 
+    <!-- Choose File Location -->
+    <string name="title_choose_file">Choose Video</string>
+    <string name="choose_file">OK</string>
+    <string name="cancel">CANCEL</string>
+
+    <string-array name="fileFormats">
+        <item>.mp4</item>
+        <item>.mkv</item>
+        <item>.avi</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

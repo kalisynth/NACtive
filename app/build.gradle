@@ -89,8 +89,8 @@ dependencies {
     compile 'com.github.salomonbrys.kotson:kotson:2.5.0'
 
     //KotPrefs
-    compile "com.chibatching.kotpref:kotpref:2.1.2"
-    compile "com.chibatching.kotpref:enum-support:2.1.2"
+    compile "com.chibatching.kotpref:kotpref:2.2.0"
+    compile "com.chibatching.kotpref:enum-support:2.2.0"
 
     //objectbox
     compile "io.objectbox:objectbox-android:$objectboxVersion"
@@ -104,6 +104,9 @@ dependencies {
 
     //Encryption
     compile "com.github.simbiose:Encryption:$encryptionVersion"
+
+    //File Browser
+    compile 'com.nononsenseapps:filepicker:4.1.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {

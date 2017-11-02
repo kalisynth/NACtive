@@ -6,6 +6,65 @@
              tools:context="au.org.nac.nactive.fragments.ExerciseSetupFragment">
 
 
+    <Button
+            android:text="@string/eSetup_addSteps_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/exercise_setup_difficulty_layout"
+            android:id="@+id/eSetup_addStepsBTN"/>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/eSetup_steps_layout"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/eSteps_btn_bar">
+
+        <Button
+                android:text="@string/eSetup_save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eSetup_saveBTN"
+                android:layout_weight="1"/>
+
+        <Button
+                android:text="@string/eSetup_update_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eSetup_updateBTN"
+                android:layout_weight="1"/>
+
+        <Button
+                android:text="@string/eSetup_delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eSetup_deleteBTN"
+                android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/exercise_setup_difficulty_layout"
+            android:id="@+id/eSetup_steps_layout">
+
+        <TextView
+                android:text="@string/eSetup_steps_label_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/eSetup_steps_label_textView"/>
+
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/eSetup_steps_list">
+
+        </ListView>
+    </LinearLayout>
+
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -14,11 +73,11 @@
             android:id="@+id/exercise_setup_difficulty_layout">
 
         <TextView
-                android:text="@string/setup_name_label_text"
+                android:text="@string/setup_difficulty_label_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/exercise_setup_difficulty_label"
-                android:layout_weight="1"/>
+                android:layout_weight="0"/>
 
         <ImageView
                 android:src="@drawable/diffstaron"
@@ -53,13 +112,13 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/exercise_setup_name_layout">
+                android:id="@+id/eSetup_name_layout">
 
             <TextView
                     android:text="@string/setup_name_label_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/exercise_setup_name_label"
+                    android:id="@+id/eSetup_name_label"
                     android:layout_weight="0"/>
 
             <EditText
@@ -75,7 +134,8 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:id="@+id/eSetup_description_layout">
 
             <TextView
                     android:text="@string/setup_description_label_text"
@@ -97,23 +157,59 @@
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:text="Name"
-                    android:ems="10"
-                    android:id="@+id/editText2"
-                    android:layout_weight="1"/>
+                android:layout_height="match_parent"
+                android:id="@+id/eSetup_videoLocation_layout">
 
             <TextView
-                    android:text="TextView"
+                    android:text="@string/setup_videolocation_label_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView3"
+                    android:id="@+id/eSetup_videoLocation_label"
+                    android:layout_weight="0"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" "
+                    android:ems="10"
+                    android:id="@+id/eSetup_videoLocation_edittext"
                     android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/eSetup_total_layout">
+            <TextView
+                    android:text="@string/times_complete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eSetup_total_label"
+                    android:layout_weight="0"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:ems="10"
+                    android:id="@+id/eSetup_total_TextView"
+                    android:layout_weight="0"/>
+
+            <TextView
+                    android:text="@string/minTime_label_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eSetup_fastTime_label"
+                    android:layout_weight="0"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:ems="10"
+                    android:id="@+id/eSetup_fastTime_TextView"
+                    android:layout_weight="0"/>
         </LinearLayout>
     </LinearLayout>
 

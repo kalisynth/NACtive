@@ -3,6 +3,7 @@ package au.org.nac.nactive.Utils
 import android.util.Log
 import au.org.nac.nactive.BuildConfig
 import au.org.nac.nactive.NACtiveApp
+import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.User
 import au.org.nac.nactive.model.User_
 import io.objectbox.Box
@@ -76,6 +77,12 @@ object LoginUtils {
         }
     }
 
+    fun userSignOut(){
+        CurrentUser.name = ""
+        CurrentUser.userId = 0
+        CurrentUser.isGoogleUser = false
+    }
+
     fun userSignIN(id: Long, name: String, googleUID : String, box: Box<User>){
         val newId : Long = 0
         if(id == newId){
@@ -89,8 +96,13 @@ object LoginUtils {
         }
     }
 
-    fun isNewUser(name: String, box: Box<User>): Boolean{
-        val names = box.query().equal(User_.googleUID, name).build().find()
-        return(names.size > 0)
+    fun isNewUser(name: String?, box: Box<User>): Boolean{
+        var names : Long = 0
+        val z : Long = 0
+        if(name != null){
+            names = box.query().equal(User_.name, name).build().count()
+        }
+        Log.d(TAG, "isNewUser name: " + name + " count = " + names)
+        return(names == z)
     }
 }
