@@ -7,9 +7,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.R
 import au.org.nac.nactive.Utils.NACiveUtils
+import au.org.nac.nactive.model.Constants.Companion.USERIDKEY
 import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.User
 import au.org.nac.nactive.model.User_
@@ -42,7 +42,7 @@ class EditUser : AppCompatActivity(){
     lateinit var workOutBox : Box<WorkOutSession>
 
     companion object {
-        internal val EXTRA_PERSON_ID = "personId"
+        internal val EXTRA_USER_ID = USERIDKEY
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,15 +56,15 @@ class EditUser : AppCompatActivity(){
         userInfoText = user_setup_info
 
         //Get User ID
-        val personId = intent.getLongExtra(EXTRA_PERSON_ID, -1)
+        val userId = intent.getLongExtra(EXTRA_USER_ID, -1)
         Log.i(TAG, "Checking User Status")
 
         //Check if New User
-        if(personId < 1){
+        if(userId < 1){
             setNewUser(user)
             Log.i(TAG, "New User")
         } else {
-            userQuery = userBox.query().equal(User_.id, personId).build()
+            userQuery = userBox.query().equal(User_.id, userId).build()
             val returnUser = userQuery.findUnique() as User
            setReturnUser(returnUser)
         }

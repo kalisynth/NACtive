@@ -54,7 +54,7 @@
     },
     {
       "id": "2:777064203352295371",
-      "lastPropertyId": "5:2841887549988361024",
+      "lastPropertyId": "6:5948007973002059995",
       "name": "ExerciseStats",
       "properties": [
         {
@@ -72,6 +72,10 @@
         {
           "id": "4:2395704628776558939",
           "name": "totalDone"
+        },
+        {
+          "id": "6:5948007973002059995",
+          "name": "exerciseName"
         }
       ],
       "relations": []
@@ -162,7 +166,7 @@
     },
     {
       "id": "6:3388072544650647665",
-      "lastPropertyId": "4:8676671968816290017",
+      "lastPropertyId": "6:5926653981211155067",
       "name": "WorkOutStats",
       "properties": [
         {
@@ -180,6 +184,14 @@
         {
           "id": "4:8676671968816290017",
           "name": "exerciseIdStoppedOn"
+        },
+        {
+          "id": "5:2758707705298899423",
+          "name": "workOutId"
+        },
+        {
+          "id": "6:5926653981211155067",
+          "name": "workOutFocus"
         }
       ],
       "relations": []

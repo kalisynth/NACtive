@@ -11,5 +11,6 @@ data class ExerciseStats (
     @Id var id: Long = 0,
     val time: Long = 0,
     val repetitions: Int = 0,
-    val totalDone: Int = 0
+    val totalDone: Int = 0,
+    val exerciseName: String = ""
 )

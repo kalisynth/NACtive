@@ -29,6 +29,9 @@
     <string name="eSetup_update_btn">Update Exercise</string>
     <string name="eSetup_delete_btn">Delete Exercise</string>
     <string name="eSetup_addSteps_btn">Add Step</string>
+    <string name="start_workout_string">Start Work Out</string>
+    <string name="back_to_setup_string">Back to Setup</string>
+    <string name="new_workout_string">New Workout</string>
 
     <!-- Text -->
     <string name="nactivemotto">Let\'s get NACTIVE</string>
@@ -55,6 +58,9 @@
     <string name="wFrequency_Random">Random</string>
     <string name="wFrequency_Scheduled">Scheduled</string>
     <string name="wFrequency_Always">Always</string>
+    <string name="new_exercise_string">New Exercise</string>
+    <string name="edit_work_out_string">Edit a Workout</string>
+    <string name="edit_an_exercise">Edit an Exercise</string>
 
     <!-- Content Description -->
     <string name="naclogocd">NAC Logo</string>

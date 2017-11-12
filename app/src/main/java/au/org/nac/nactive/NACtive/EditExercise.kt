@@ -1,15 +1,12 @@
 package au.org.nac.nactive.NACtive
 
-import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -18,6 +15,8 @@ import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.R
 import au.org.nac.nactive.Utils.NACiveUtils
 import au.org.nac.nactive.model.BodyParts
+import au.org.nac.nactive.model.Constants.Companion.EXERCISEIDKEY
+import au.org.nac.nactive.model.Constants.Companion.USERIDKEY
 import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.Exercise
 import au.org.nac.nactive.model.Exercise_
@@ -26,6 +25,7 @@ import io.objectbox.query.Query
 import kotlinx.android.synthetic.main.fragment_exercise_setup.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.image
+import org.jetbrains.anko.sdk25.coroutines.onClick
 import javax.inject.Inject
 
 /**
@@ -70,16 +70,20 @@ class EditExercise : AppCompatActivity(){
 
     lateinit var stepsAdapter : ArrayAdapter<String>
 
+    lateinit var context : Context
+
 
     companion object {
-        internal val EXTRA_PERSON_ID = "personId"
-        internal val EXTRA_EXERCISE_ID = "exerciseId"
+        internal val EXTRA_PERSON_ID = USERIDKEY
+        internal val EXTRA_EXERCISE_ID = EXERCISEIDKEY
     }
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         //Wanted to try using fragments, Im no good with fragments, decided to just do it the way I have done it before
         setContentView(R.layout.fragment_exercise_setup)
+
+        context = this
 
         exerciseBox = (application as NACtiveApp).boxStore.boxFor(Exercise::class.java)
 
@@ -93,6 +97,7 @@ class EditExercise : AppCompatActivity(){
         exerciseStepsList = eSetup_steps_list
         exerciseTotal = eSetup_total_TextView
         exerciseAddStepsBtn = eSetup_addStepsBTN
+        exerciseMinTime = eSetup_fastTime_TextView
 
         //Get Defaults
         defaultLevel = R.integer.defaultlevel
@@ -100,6 +105,15 @@ class EditExercise : AppCompatActivity(){
 
         //get Exercise Id
         val exerciseId = intent.getLongExtra(EXTRA_EXERCISE_ID, -1)
+
+        // Difficulty Checking and Images
+        if(Build.VERSION.SDK_INT > 22) {
+            staron = getDrawable(R.drawable.diffstaron)
+            staroff = getDrawable(R.drawable.diffstaroff)
+        } else {
+            staron = this.resources.getDrawable(R.drawable.diffstaron)
+            staroff = this.resources.getDrawable(R.drawable.diffstaroff)
+        }
 
         //Check if New Exercise
         if(exerciseId < 1){
@@ -115,15 +129,6 @@ class EditExercise : AppCompatActivity(){
             exerciseQuery = exerciseBox.query().equal(Exercise_.id, exerciseId).build()
             exercise = exerciseQuery.findUnique() as Exercise
             oldExercise(exercise!!)
-        }
-
-        // Difficulty Checking and Images
-        if(Build.VERSION.SDK_INT > 22) {
-            staron = getDrawable(R.drawable.diffstaron)
-            staroff = getDrawable(R.drawable.diffstaroff)
-        } else {
-            staron = this.resources.getDrawable(R.drawable.diffstaron)
-            staroff = this.resources.getDrawable(R.drawable.diffstaroff)
         }
 
         exercise_diff_level_1.setOnClickListener {
@@ -189,11 +194,17 @@ class EditExercise : AppCompatActivity(){
 
     private fun oldExercise(exercise: Exercise){
         this.exercise = exercise
+        Log.i(TAG, "Setting up old Exercise")
         try{
             exerciseNameText.setText(exercise.name)
+            Log.d(TAG, "Exercise Name: " + exercise.name)
             exerciseDescText.setText(exercise.description)
             initDifficulty(exercise.difficultylevel)
-            exerciseTotal.setText(exercise.overallTotal)
+            try{
+                exerciseTotal.text = exercise.overallTotal.toString()
+            } catch( e : Resources.NotFoundException){
+                exerciseTotal.text = "0"
+            }
             exerciseMinTime.text = NACiveUtils.getTime(exercise.minTime)
             exerciseVidLocText.text = exercise.videoLocation
             stepsList = NACiveUtils.returnStepsList(exercise.stepsStrings as String) as MutableList<String>
@@ -217,15 +228,14 @@ class EditExercise : AppCompatActivity(){
         exercise.description = exerciseDescText.text.toString()
         exercise.overallTotal = 0
         exercise.videoLocation = exerciseVidLocText.text as String
-        try{
-            exercise.stepsStrings = NACiveUtils.returnStepsString(stepsList)
-        } catch(e: NullPointerException){
-            Log.e(TAG, "Error converting List to String " + e)
-        }
+        Log.d(TAG, "Exercise StepsList: " + stepsList)
+        exercise.stepsStrings = NACiveUtils.stringFromList(stepsList)
+        Log.d(TAG, "Result String: " + NACiveUtils.stringFromList(stepsList))
         exercise.difficultylevel = levelofdifficulty
         exerciseBox.put(exercise)
         Log.i(TAG, "New Exercise Id: " + exercise.id)
         Toast.makeText(this, "New Exercise Saved", Toast.LENGTH_LONG).show()
+        saveAlertPopup()
     }
 
     private fun updateExercise(exercise : Exercise){
@@ -234,15 +244,11 @@ class EditExercise : AppCompatActivity(){
         exercise.name = exerciseNameText.text.toString()
         exercise.description = exerciseDescText.text.toString()
         exercise.videoLocation = exerciseVidLocText.text.toString()
-        try{
-            exercise.stepsStrings = NACiveUtils.returnStepsString(stepsList)
-        } catch (e: NullPointerException){
-            Log.e(TAG, "Error Converting List to String " + e)
-        }
+        exercise.stepsStrings = NACiveUtils.stringFromList(stepsList)
         exercise.difficultylevel = levelofdifficulty
         exerciseBox.put(exercise)
         Log.i(TAG, "Exercise has been updated Exercise Id: " + exercise.id)
-
+        saveAlertPopup()
     }
 
     private fun deleteExercise(exercise : Exercise){
@@ -294,11 +300,10 @@ class EditExercise : AppCompatActivity(){
         stepsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, stepsList)
     }
 
-    fun getFileString(){
+    private fun getFileString(){
         intent = Intent()
                 .setType("video/*")
                 .setAction(Intent.ACTION_GET_CONTENT)
-
         startActivityForResult(Intent.createChooser(intent, "Select a Video"), 123);
     }
 
@@ -308,5 +313,29 @@ class EditExercise : AppCompatActivity(){
             filePath = data!!.data.toString()
             exerciseVidLocText.text = filePath
         }
+    }
+
+    private fun saveAlertPopup(){
+        //Save window popup
+        alert{
+            customView{
+                linearLayout{
+                    button{
+                        text = getString(R.string.edit_work_out_string)
+                        onClick {
+                            val intent = Intent(applicationContext, EditWorkOut::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                    button{
+                        text = getString(R.string.back_to_setup_string)
+                        onClick {
+                            val intent = Intent(applicationContext, Setup::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
+            }
+        }.show()
     }
 }

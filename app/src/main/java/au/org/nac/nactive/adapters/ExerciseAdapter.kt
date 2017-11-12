@@ -10,7 +10,7 @@ import au.org.nac.nactive.model.Exercise
 import kotlinx.android.synthetic.main.exerciseitem.view.*
 
 /**
- * Created by Cade2 on 27/10/2017.
+ * Exercise List Adapter
  */
 
 class ExerciseAdapter : BaseAdapter(){
@@ -39,9 +39,9 @@ class ExerciseAdapter : BaseAdapter(){
         var convertView = convertView
         val holder : ExerciseViewHolder
         if(convertView == null){
-            convertView = LayoutInflater.from(parent.context).inflate(R.layout.exerciseitem, parent, false)
+            convertView = LayoutInflater.from(parent.context).inflate(R.layout.exerciseitem, parent, false) as View
             holder = ExerciseViewHolder(convertView)
-            convertView!!.tag = holder
+            convertView.tag = holder
         } else {
             holder = convertView.tag as ExerciseViewHolder
         }

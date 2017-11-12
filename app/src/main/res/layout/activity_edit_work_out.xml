@@ -8,54 +8,47 @@
         tools:context="au.org.nac.nactive.NACtive.EditWorkOut"
         tools:layout_editor_absoluteY="89dp">
 
+    <TextView
+            style="@style/NACLabelText"
+            android:text="@string/wsetup_add_exercises"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/wExercisesRV"
+            android:id="@+id/wsaelabel"/>
+    <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wExercisesRV"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/workOutButtonBar"
+            android:layout_toStartOf="@+id/workOutLists"
+            >
+    </ListView>
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/workoutdetailslayout"
-            android:layout_toEndOf="@+id/workOutButtonBar"
+            android:layout_alignStart="@+id/workoutdetailslayout"
             android:layout_alignEnd="@+id/workoutdetailslayout"
             android:layout_centerInParent="true"
             android:id="@+id/workOutLists">
 
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/wSetup_Current_Exercises"
+                android:layout_weight="0"/>
 
-            <TextView
-                    android:text="@string/wsetup_add_exercises"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/wsaelabel"/>
-
-            <ListView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/wExercisesRV"
-                    tools:layout_editor_absoluteY="260dp"
-                    tools:layout_editor_absoluteX="279dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:orientation="vertical"
+        <TextView
+                android:text="@string/wSetup_current_exercises"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0">
+                android:id="@+id/wscelabel"
+                android:layout_weight="0"/>
 
-            <TextView
-                    android:text="@string/wSetup_current_exercises"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/wscelabel"/>
-
-            <ListView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/wSetup_Current_Exercises"/>
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -149,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_above="@+id/wCalendar"
+            android:layout_above="@+id/wSetup_work_out_schedule_list"
             android:id="@+id/wFreq_RadioGroup"
             tools:layout_editor_absoluteY="33dp"
             android:layout_alignParentEnd="true"
@@ -177,16 +170,6 @@
                 android:layout_weight="0"/>
     </RadioGroup>
 
-    <CalendarView
-            android:layout_width="637dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/wCalendar"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            tools:layout_editor_absoluteY="80dp"
-            android:layout_toEndOf="@+id/workOutLists"
-            tools:layout_editor_absoluteX="640dp"/>
-
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -208,5 +191,13 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/wSetup_Update_btn"/>
     </LinearLayout>
+
+    <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wSetup_work_out_schedule_list"
+            android:layout_marginTop="67dp"
+            android:layout_below="@+id/workoutdetailslayout"
+            android:layout_toEndOf="@+id/workOutLists"/>
 
 </RelativeLayout>

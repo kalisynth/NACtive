@@ -2,14 +2,11 @@ package au.org.nac.nactive.Utils
 
 import android.app.FragmentManager
 import android.app.FragmentTransaction
-import android.content.Context
-import au.org.nac.nactive.R
 import au.org.nac.nactive.model.*
 import com.mcxiaoke.koi.ext.asDateString
 import com.mcxiaoke.koi.ext.asString
 import com.mcxiaoke.koi.ext.dateParse
 import io.objectbox.Box
-import io.objectbox.query.Query
 
 /**
  * NACtive Utility Class
@@ -54,15 +51,12 @@ object NACiveUtils {
         return workOutQuery.findUnique()?.name
     }
 
-    fun returnStepsString(steps : List<String>) : String{
-        val stepsString = steps.joinToString { "," }
-        return stepsString
+    fun stringFromList(strings: List<String>) : String{
+        return strings.joinToString(",")
     }
 
     fun returnStepsList(steps: String) : List<String>{
-        /*return Arrays.asList(*steps.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray())*/
-        val stepList : List<String> = steps.split(",").map {it.trim()}
-        return stepList
+        return steps.split(",").map {it.trim()}
     }
 
     fun returnFreqEnum(freq : String) : ScheduleFrequency{
