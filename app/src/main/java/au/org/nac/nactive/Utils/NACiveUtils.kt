@@ -51,6 +51,50 @@ object NACiveUtils {
         return workOutQuery.findUnique()?.name
     }
 
+    fun returnBodyPart(bp : String) : BodyParts{
+        when(bp){
+            "Left Arm" -> {
+                 return BodyParts.LEFTARM
+            }
+            "Right Arm" -> {
+                return BodyParts.RIGHTARM
+            }
+            "Left Hand" -> {
+                return BodyParts.LEFTHAND
+            }
+            "Left Foot" -> {
+                return BodyParts.LEFTFOOT
+            }
+            "Left Leg" -> {
+                return BodyParts.LEFTLEG
+            }
+            "Right Hand" -> {
+                return BodyParts.RIGHTHAND
+            }
+            "Right Foot" -> {
+                return BodyParts.RIGHTFOOT
+            }
+            "Right Leg" -> {
+                return BodyParts.RIGHTLEG
+            }
+            "Torso" -> {
+                return BodyParts.TORSO
+            }
+            "Head" -> {
+                return BodyParts.HEAD
+            }
+            "Neck" -> {
+                return BodyParts.NECK
+            }
+            "Spine" -> {
+                return BodyParts.SPINE
+            }
+            else -> {
+               return BodyParts.DEFAULT
+            }
+        }
+    }
+
     fun stringFromList(strings: List<String>) : String{
         return strings.joinToString(",")
     }

@@ -6,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/mainbgcolor"
-        tools:context="au.org.nac.nactive.NACtive.Setup">
+        tools:context="au.org.nac.nactive.NACtive.Setup"
+        >
 
     <TextView
             style="@style/NACLabelText"
@@ -14,25 +15,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
             android:id="@+id/setupTitle"/>
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_below="@id/setupTitle"
-            android:gravity="center"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="75dp"
             android:layout_height="wrap_content"
             android:id="@+id/setup_btn_bar">
-
-        <!--<Button
-                style="@style/NACNavButton"
-                android:text="@string/setup_user_btn_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/setup_user_btn"
-                android:layout_margin="10dp"
-                android:layout_weight="1"/>-->
 
         <Button
                 style="@style/NACNavButton"
@@ -60,6 +53,7 @@
                 android:id="@+id/setup_appsettings_btn"
                 android:layout_weight="1"/>
     </LinearLayout>
+
     <Button
             style="@style/NACNavButton"
             android:layout_width="wrap_content"

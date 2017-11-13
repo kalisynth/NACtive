@@ -36,6 +36,7 @@
                 style="@style/NACNavButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/lrgMargin"
                 android:id="@+id/main_information_btn"
                 android:text="@string/information_btn_text"/>
 
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text="@string/nactivemotto"
             android:gravity="center"
-            style="@style/Base.TextAppearance.AppCompat.Headline"
+            style="@style/NACLabelText"
             android:id="@+id/textView"/>
 
     <Button

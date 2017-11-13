@@ -18,6 +18,7 @@ data class Exercise(
     var overallTotal: Int = 0,
     var stepsStrings: String? = "",
     var videoLocation: String? = ""
-){
-    lateinit var workout : ToOne<WorkOutSession>
-}
+)/*{
+    @Backlink
+    lateinit var workout : ToOne<Exercise>
+}*/

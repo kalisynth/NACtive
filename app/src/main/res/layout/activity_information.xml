@@ -9,13 +9,6 @@
         tools:context="au.org.nac.nactive.NACtive.Information">
 
 
-    <TextView
-            android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/infotextbox"/>
-
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -70,5 +63,12 @@
                     android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/infotextbox"/>
 
 </RelativeLayout>

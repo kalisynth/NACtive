@@ -15,6 +15,7 @@ import au.org.nac.nactive.model.Constants.Companion.USERIDKEY
 import au.org.nac.nactive.model.Constants.Companion.WORKOUTIDKEY
 import com.mcxiaoke.koi.ext.onItemClick
 import io.objectbox.Box
+import io.objectbox.kotlin.boxFor
 import io.objectbox.query.Query
 import kotlinx.android.synthetic.main.activity_edit_work_out.*
 import org.jetbrains.anko.alert
@@ -69,15 +70,17 @@ class EditWorkOut : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_work_out)
 
-        exerciseBox = (application as NACtiveApp).boxStore.boxFor(Exercise::class.java)
-        workoutBox = (application as NACtiveApp).boxStore.boxFor(WorkOutSession::class.java)
-        userBox = (application as NACtiveApp).boxStore.boxFor(User::class.java)
+        Log.i(TAG, "_-ObjectBoxes-_") //Open the Boxes from objectBox
+        exerciseBox = (application as NACtiveApp).boxStore.boxFor<Exercise>()
+        workoutBox = (application as NACtiveApp).boxStore.boxFor<WorkOutSession>()
+        userBox = (application as NACtiveApp).boxStore.boxFor<User>()
 
+        //Id's
         workOutId = intent.getLongExtra(EXTRA_WORKOUT_ID, -1)
         userId = intent.getLongExtra(EXTRA_USER_ID, -1)
         Log.i(TAG, "User Id: $userId || WorkOut Id: $workOutId")
 
-        if(userId < 1){
+        if(userId < 1){ //check if new user
             user = User()
             Log.i(TAG, "New User")
         } else {
@@ -87,7 +90,7 @@ class EditWorkOut : AppCompatActivity() {
             Log.d(TAG, "Old User: " + user)
         }
 
-        if(workOutId < 1){
+        if(workOutId < 1){ //Check whether workout id exists
             workOut = WorkOutSession()
             isFreq = ScheduleFrequency.ALWAYS
             exerciseList = mutableListOf()
@@ -97,7 +100,21 @@ class EditWorkOut : AppCompatActivity() {
             workoutQuery = workoutBox.query().equal(WorkOutSession_.id, workOutId).build()
             workOut = workoutQuery.findUnique() as WorkOutSession
             isFreq = NACiveUtils.returnFreqEnum(workOut.frequencySchedule.toString())
-            exerciseList = workOut.exercises as MutableList<Exercise>
+            val workOutEList = workOut.exercises
+            exerciseList = mutableListOf()
+            if(workOut.exercises.isNotEmpty()){ //Add Exercises from WorkOut Exercise List
+                Log.i(TAG, "Adding Exercises")
+                Log.d(TAG, workOutEList.toString())
+                var i = 0
+                while(i < workOut.exercises.size){
+                    exerciseList.add(workOutEList[i])
+                    Log.d(TAG, "Exercise $i Added: ${workOutEList[i]}")
+                    i++
+                }
+            } else {
+                Log.i(TAG, "WorkOut Exercise List is Empty")
+                Log.d(TAG, workOutEList.toString())
+            }
             Log.i(TAG, "Old Work Out")
             Log.d(TAG, "Old Work Out: $workOut")
         }
@@ -114,9 +131,12 @@ class EditWorkOut : AppCompatActivity() {
             saveNewWorkOut()
         }
         wUpdateBtn = wSetup_Update_btn
+        if(isNewExercise){
+            wUpdateBtn.visibility = View.INVISIBLE
+        }
         wUpdateBtn.setOnClickListener {
-            if(workOut != null){
-                updateWorkOut(workOut as WorkOutSession)
+            if(!isNewExercise){
+                updateWorkOut(workOut)
             }
         }
         Log.i(TAG, "--Button Setup--")
@@ -152,7 +172,13 @@ class EditWorkOut : AppCompatActivity() {
         bpSpinner = wAoFSpinner
         bpAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, BodyParts.values())
         bpSpinner.adapter = bpAdapter
-        val defaultPosition = bpAdapter.getPosition(BodyParts.DEFAULT)
+        var defaultPosition = bpAdapter.getPosition(BodyParts.DEFAULT)
+
+        if(!isNewExercise){
+            val selectBodyParts = NACiveUtils.returnBodyPart(workOut.areaOfFocus.toString())
+            defaultPosition = bpAdapter.getPosition(selectBodyParts)
+        }
+
         bpSpinner.setSelection(defaultPosition)
         bpSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -202,7 +228,6 @@ class EditWorkOut : AppCompatActivity() {
         wEName = wSetup_name_editText
         if(!isNewExercise){
             wEName.text = workOut.name
-
         }
     }
 
@@ -247,7 +272,12 @@ class EditWorkOut : AppCompatActivity() {
         workOut.name = wEName.text.toString()
         workOut.areaOfFocus = selectedBodyPart.friendlyBodyPart
         workOut.frequencySchedule = isFreq.toString()
-        workOut.exercises = exerciseList
+        workOut.exercises.clear()
+        var i = 0
+        while(i < exerciseList.size){
+            workOut.exercises.add(exerciseList[i])
+            i++
+        }
         workoutBox.put(workOut)
         when(isFreq){
             ScheduleFrequency.ALWAYS -> {
@@ -267,17 +297,28 @@ class EditWorkOut : AppCompatActivity() {
         }
         workOutId = workOut.id
         Log.i(TAG, "New Workout: " + workOut.id + " Added")
+        if(wUpdateBtn.visibility == View.INVISIBLE){
+            wUpdateBtn.visibility = View.VISIBLE
+        }
+        if(isNewExercise){
+            isNewExercise = false
+        }
         saveAlertPopUp()
     }
 
     private fun updateWorkOut(workOut: WorkOutSession){
+        //Update WorkOut
         this.workOut = workOut
         Log.i(TAG, "Updating WorkOut Session" + workOut.id)
         workOut.name = wEName.text.toString()
         workOut.areaOfFocus = selectedBodyPart.friendlyBodyPart
         workOut.frequencySchedule = isFreq.toString()
-        workOut.exercises = exerciseList
-        //TODO update exercises in WorkOut
+        workOut.exercises.clear()
+        var i = 0
+        while(i < exerciseList.size){
+            workOut.exercises.add(exerciseList[i])
+            i++
+        }
         workoutBox.put(workOut)
         Log.i(TAG, "WorkOut Updated: " + workOut.id)
     }

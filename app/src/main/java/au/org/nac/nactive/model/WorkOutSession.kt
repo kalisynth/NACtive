@@ -20,6 +20,5 @@ data class WorkOutSession (
     var areaOfFocus : String? = "",
     var nextDate: Date? = null
 ){
-    @Backlink
-    lateinit var exercises : List<Exercise>
+    lateinit var exercises : ToMany<Exercise>
 }
