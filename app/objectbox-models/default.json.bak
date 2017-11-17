@@ -45,12 +45,7 @@
           "name": "videoLocation"
         }
       ],
-      "relations": [
-        {
-          "id": "3:4978078978103867574",
-          "name": "workout"
-        }
-      ]
+      "relations": []
     },
     {
       "id": "2:777064203352295371",
@@ -162,7 +157,12 @@
           "name": "nextDate"
         }
       ],
-      "relations": []
+      "relations": [
+        {
+          "id": "4:3002344173837848884",
+          "name": "exercises"
+        }
+      ]
     },
     {
       "id": "6:3388072544650647665",
@@ -199,7 +199,7 @@
   ],
   "lastEntityId": "6:3388072544650647665",
   "lastIndexId": "4:3550847287553109628",
-  "lastRelationId": "3:4978078978103867574",
+  "lastRelationId": "4:3002344173837848884",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
@@ -232,7 +232,8 @@
   ],
   "retiredRelationUids": [
     5017573604207577282,
-    8293265210604238457
+    8293265210604238457,
+    4978078978103867574
   ],
   "version": 1
 }

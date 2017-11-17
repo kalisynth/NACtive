@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:7977951158355589466",
-      "lastPropertyId": "13:4379676725098238050",
+      "lastPropertyId": "14:3288373291376080388",
       "name": "Exercise",
       "properties": [
         {
@@ -43,6 +43,10 @@
         {
           "id": "12:8528355826709431899",
           "name": "videoLocation"
+        },
+        {
+          "id": "14:3288373291376080388",
+          "name": "support"
         }
       ],
       "relations": []

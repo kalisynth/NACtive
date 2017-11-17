@@ -1,15 +1,12 @@
-package au.org.nac.nactive.NACtive
+package au.org.nac.nactive.nactive
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.R
-import au.org.nac.nactive.Utils.LoginUtils
 import au.org.nac.nactive.adapters.ExerciseAdapter
 import au.org.nac.nactive.adapters.WorkOutAdapter
 import au.org.nac.nactive.model.*
@@ -20,7 +17,6 @@ import io.objectbox.query.Query
 import kotlinx.android.synthetic.main.activity_setup.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.sdk25.coroutines.onItemClick
 
 class Setup : AppCompatActivity() {
 
@@ -66,6 +62,11 @@ class Setup : AppCompatActivity() {
 
         setup_home_btn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        setup_appsettings_btn.setOnClickListener {
+            val intent = Intent(this, Options::class.java)
             startActivity(intent)
         }
     }

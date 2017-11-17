@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="OtagoNames_Array">
+    <item name="otago1exercisename">Head Movements</item>
+    <item name="otago2exercisename">Neck Movements</item>
+    <item name="otago3exercisename">Back Extension</item>
+    <item name="otago4exercisename">Trunk Movements</item>
+    <item name="otago5exercisename">Ankle Movements</item>
+    <item name="otago6exercisename">Front Knee</item>
+    <item name="otago7exercisename">Back Knee</item>
+    <item name="otago8exercisename">Side Hip</item>
+    <item name="otago9exercisename">Calf Raises</item>
+    <item name="otago10exercisename">Toe Raises</item>
+    <item name="otago11exercisename">Knee Bends</item>
+    <item name="otago12exercisename">Backwards Walking</item>
+    <item name="otago13exercisename">Walking and Turning Around</item>
+    <item name="otago14exercisename">Sideways Walking</item>
+    <item name="otago15exercisename">Heel Toe Standing</item>
+    <item name="otago16exercisename">Heel Toe Walking</item>
+    <item name="otago17exercisename">One Leg Stand</item>
+    <item name="otago18exercisename">Heel Walking</item>
+    <item name="otago19exercisename">Toe Walking</item>
+    <item name="otago20exercisename">Heel Toe Walking Backwards</item>
+    <item name="otago21exercisename">Sit to Stand Two Hands</item>
+    <item name="otago22exercisename">Sit to Stand One Hand</item>
+    <item name="otago23exercisename">Heel Toe Walking No Hands</item>
+    <item name="otago24exercisename">Stair Walking</item>
+    </string-array>
+
+    <string-array name="OtagoSteps_Array">
+        <!-- Short Desc : Long Desc : Body Part, -->
+        <item name="o1ExSteps">Stand Up : Stand Up Tall and Look ahead : Head, Turn Head Right : Slowly turn your head as far as you can to the right : Head, Turn Head Left : Slowly turn your head as far as you can to the left, Repeat 5 Times : Repeat 5 Times to Each Side : Head</item>
+        <item name="o2ExSteps">Stand Up : Stand Up Tall and Look ahead : Neck, Hand on Chin : Place on hand on chin : Neck, Move Head Back : Guide your head straight back : Neck, Repeat 5 Times : Repeat 5 Times : Neck</item>
+        <item name="o3ExSteps">Stand Up : Stand up tall with feet shoulder width apart : Back, Hands on back : Place hands on the small : Back, Arch Back : Gently Arch Back : Back, Repeat 5 Times : Repeat 5 Times : Back</item>
+        <item name="o4ExSteps">to do : add more here : Whole Body</item>
+        <item name="o5ExSteps">to do : add more here : Whole Body</item>
+        <item name="o6ExSteps">to do : add more here : Whole Body</item>
+        <item name="o7ExSteps">to do : add more here : Whole Body</item>
+        <item name="o8ExSteps">to do : add more here : Whole Body</item>
+        <item name="o9ExSteps">to do : add more here : Whole Body</item>
+        <item name="o10ExSteps">to do : add more here : Whole Body</item>
+        <item name="o11ExSteps">to do : add more here : Whole Body</item>
+        <item name="o12ExSteps">to do : add more here : Whole Body</item>
+        <item name="o13ExSteps">to do : add more here : Whole Body</item>
+        <item name="o14ExSteps">to do : add more here : Whole Body</item>
+        <item name="o15ExSteps">to do : add more here : Whole Body</item>
+        <item name="o16ExSteps">to do : add more here : Whole Body</item>
+        <item name="o17ExSteps">to do : add more here : Whole Body</item>
+        <item name="o18ExSteps">to do : add more here : Whole Body</item>
+        <item name="o19ExSteps">to do : add more here : Whole Body</item>
+        <item name="o20ExSteps">to do : add more here : Whole Body</item>
+        <item name="o21ExSteps">to do : add more here : Whole Body</item>
+        <item name="o22ExSteps">to do : add more here : Whole Body</item>
+        <item name="o23ExSteps">to do : add more here : Whole Body</item>
+        <item name="o24ExSteps">to do : add more here : Whole Body</item>
+    </string-array>
+</resources>

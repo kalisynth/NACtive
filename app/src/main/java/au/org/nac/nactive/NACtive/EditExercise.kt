@@ -1,4 +1,4 @@
-package au.org.nac.nactive.NACtive
+package au.org.nac.nactive.nactive
 
 import android.app.Activity
 import android.content.Context
@@ -13,7 +13,7 @@ import android.view.View
 import android.widget.*
 import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.R
-import au.org.nac.nactive.Utils.NACiveUtils
+import au.org.nac.nactive.utilities.NACtiveUtilities
 import au.org.nac.nactive.model.BodyParts
 import au.org.nac.nactive.model.Constants.Companion.EXERCISEIDKEY
 import au.org.nac.nactive.model.Constants.Companion.USERIDKEY
@@ -21,6 +21,7 @@ import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.Exercise
 import au.org.nac.nactive.model.Exercise_
 import io.objectbox.Box
+import io.objectbox.kotlin.boxFor
 import io.objectbox.query.Query
 import kotlinx.android.synthetic.main.fragment_exercise_setup.*
 import org.jetbrains.anko.*
@@ -41,8 +42,8 @@ class EditExercise : AppCompatActivity(){
     lateinit var staroff : Drawable
     private var TAG = "EXERCISE_EDITOR"
     private lateinit var stepsList : MutableList<String>
-    private var defaultLevel : Int = 0
-    private var defaultReps : Int = 0
+    private var defaultLevel : Int = 1
+    private var defaultReps : Int = 5
     private var READ_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 13
     private var filePath = ""
 
@@ -58,6 +59,7 @@ class EditExercise : AppCompatActivity(){
     private lateinit var exerciseTotal : TextView
     private lateinit var exerciseMinTime : TextView
     private lateinit var exerciseAddStepsBtn : Button
+    private lateinit var exerciseToggleBtn : ToggleButton
     lateinit var stepsShortDesc : EditText
     lateinit var stepsLongDesc : EditText
     private var PICK_FILE_REQUEST = 9002
@@ -85,7 +87,7 @@ class EditExercise : AppCompatActivity(){
 
         context = this
 
-        exerciseBox = (application as NACtiveApp).boxStore.boxFor(Exercise::class.java)
+        exerciseBox = (application as NACtiveApp).boxStore.boxFor<Exercise>()
 
         //init UI
         exerciseNameText = exercise_setup_name_edittext
@@ -98,6 +100,7 @@ class EditExercise : AppCompatActivity(){
         exerciseTotal = eSetup_total_TextView
         exerciseAddStepsBtn = eSetup_addStepsBTN
         exerciseMinTime = eSetup_fastTime_TextView
+        exerciseToggleBtn = eSetup_Support_Toggle
 
         //Get Defaults
         defaultLevel = R.integer.defaultlevel
@@ -125,6 +128,7 @@ class EditExercise : AppCompatActivity(){
                 deleteStep(i)
                 true
             }
+            exerciseToggleBtn.isEnabled = false
         } else {
             exerciseQuery = exerciseBox.query().equal(Exercise_.id, exerciseId).build()
             exercise = exerciseQuery.findUnique() as Exercise
@@ -205,9 +209,9 @@ class EditExercise : AppCompatActivity(){
             } catch( e : Resources.NotFoundException){
                 exerciseTotal.text = "0"
             }
-            exerciseMinTime.text = NACiveUtils.getTime(exercise.minTime)
+            exerciseMinTime.text = NACtiveUtilities.getTime(exercise.minTime)
             exerciseVidLocText.text = exercise.videoLocation
-            stepsList = NACiveUtils.returnStepsList(exercise.stepsStrings as String) as MutableList<String>
+            stepsList = NACtiveUtilities.returnStepsList(exercise.stepsStrings as String) as MutableList<String>
             if(stepsList.size == 0){
                 stepsList = mutableListOf("Add Steps by tapping the Add Step button, delete steps by long pressing on it")
             }
@@ -217,6 +221,7 @@ class EditExercise : AppCompatActivity(){
                 deleteStep(i)
                 true
             }
+            exerciseToggleBtn.isEnabled = exercise.support
         } catch(e: NullPointerException){
             Log.e(TAG, "Error Setting Old Exercise" + e)
         }
@@ -229,8 +234,8 @@ class EditExercise : AppCompatActivity(){
         exercise.overallTotal = 0
         exercise.videoLocation = exerciseVidLocText.text as String
         Log.d(TAG, "Exercise StepsList: " + stepsList)
-        exercise.stepsStrings = NACiveUtils.stringFromList(stepsList)
-        Log.d(TAG, "Result String: " + NACiveUtils.stringFromList(stepsList))
+        exercise.stepsStrings = NACtiveUtilities.stringFromList(stepsList)
+        Log.d(TAG, "Result String: " + NACtiveUtilities.stringFromList(stepsList))
         exercise.difficultylevel = levelofdifficulty
         exerciseBox.put(exercise)
         Log.i(TAG, "New Exercise Id: " + exercise.id)
@@ -244,7 +249,7 @@ class EditExercise : AppCompatActivity(){
         exercise.name = exerciseNameText.text.toString()
         exercise.description = exerciseDescText.text.toString()
         exercise.videoLocation = exerciseVidLocText.text.toString()
-        exercise.stepsStrings = NACiveUtils.stringFromList(stepsList)
+        exercise.stepsStrings = NACtiveUtilities.stringFromList(stepsList)
         exercise.difficultylevel = levelofdifficulty
         exerciseBox.put(exercise)
         Log.i(TAG, "Exercise has been updated Exercise Id: " + exercise.id)

@@ -1,4 +1,4 @@
-package au.org.nac.nactive.NACtive
+package au.org.nac.nactive.nactive
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import au.org.nac.nactive.R
-import au.org.nac.nactive.Utils.NACiveUtils
+import au.org.nac.nactive.utilities.NACtiveUtilities
 import au.org.nac.nactive.model.Constants.Companion.USERIDKEY
 import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.User
@@ -109,11 +109,11 @@ class EditUser : AppCompatActivity(){
         val userCreationDate = getString(R.string.user_info_creation_date) + user.createdDate
 
         val userCurrentWO = getString(R.string.user_info_current_session) +
-                NACiveUtils.returnWorkOutName(user.currentWorkOutId, workOutBox) //Get Current WorkOut
+                NACtiveUtilities.returnWorkOutName(user.currentWorkOutId, workOutBox) //Get Current WorkOut
         val userPreviousWO = getString(R.string.user_info_previous_session) +
-                NACiveUtils.returnWorkOutName(user.previousWorkOutId, workOutBox) //Get Previous WorkOut
+                NACtiveUtilities.returnWorkOutName(user.previousWorkOutId, workOutBox) //Get Previous WorkOut
         val userNextWO = getString(R.string.user_info_next_session) +
-                NACiveUtils.returnWorkOutName(user.nextWorkOutId, workOutBox) //Get Next WorkOut
+                NACtiveUtilities.returnWorkOutName(user.nextWorkOutId, workOutBox) //Get Next WorkOut
 
         userInfoComplete = userInfoStart + "\n" +
                 userCreationDate + "\n" +

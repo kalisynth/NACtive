@@ -31,6 +31,7 @@
     <string name="eSetup_addSteps_btn">Add Step</string>
     <string name="start_workout_string">Start Work Out</string>
     <string name="back_to_setup_string">Back to Setup</string>
+    <string name="eSetup_SupportToggle">Support</string>
     <string name="new_workout_string">New Workout</string>
 
     <!-- Text -->

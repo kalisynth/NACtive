@@ -12,6 +12,7 @@ data class Exercise(
     @Id var id: Long = 0,
     var name: String? = "",
     var description: String? = "",
+    var support : Boolean = false,
     var minTime: Long = 0,
     var difficultylevel: Int = 0,
     var experience: Int = 0,

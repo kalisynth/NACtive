@@ -1,4 +1,4 @@
-package au.org.nac.nactive.NACtive
+package au.org.nac.nactive.nactive
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

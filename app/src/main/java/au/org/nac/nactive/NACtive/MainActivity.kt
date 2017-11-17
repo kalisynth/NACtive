@@ -1,19 +1,17 @@
-package au.org.nac.nactive.NACtive
+package au.org.nac.nactive.nactive
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.R
-import au.org.nac.nactive.Utils.NACiveUtils.clearUser
-import au.org.nac.nactive.Utils.LoginUtils
-import au.org.nac.nactive.Utils.NACiveUtils
+import au.org.nac.nactive.utilities.NACtiveUtilities.clearUser
+import au.org.nac.nactive.utilities.LoginUtils
+import au.org.nac.nactive.utilities.NACtiveUtilities
 import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.User
 import au.org.nac.nactive.model.User_
@@ -129,7 +127,7 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedList
         val intent = Intent(this, EditWorkOut::class.java)
         val user = User()
         user.name = CurrentUser.name
-        user.createdDate = NACiveUtils.getDate(System.currentTimeMillis())
+        user.createdDate = NACtiveUtilities.getDate(System.currentTimeMillis())
         user.googleUID = CurrentUser.googleUUID
         user.userLevel = 1
         user.userExperience = 0

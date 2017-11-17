@@ -1,7 +1,5 @@
-package au.org.nac.nactive.Utils
+package au.org.nac.nactive.utilities
 
-import android.app.FragmentManager
-import android.app.FragmentTransaction
 import au.org.nac.nactive.model.*
 import com.mcxiaoke.koi.ext.asDateString
 import com.mcxiaoke.koi.ext.asString
@@ -11,16 +9,10 @@ import io.objectbox.Box
 /**
  * NACtive Utility Class
  */
-object NACiveUtils {
+object NACtiveUtilities {
 
-    var dateFormat = "dd/MM"
-    var timeFormat = "HH:mm"
-
-    inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit){
-        val fragmentTransaction = beginTransaction()
-        fragmentTransaction.func()
-        fragmentTransaction.commit()
-    }
+    private var dateFormat = "dd/MM"
+    private var timeFormat = "HH:mm"
 
     fun getDate(ttf: Long) : String{
         val dString = ttf.asDateString()
@@ -53,45 +45,19 @@ object NACiveUtils {
 
     fun returnBodyPart(bp : String) : BodyParts{
         when(bp){
-            "Left Arm" -> {
-                 return BodyParts.LEFTARM
-            }
-            "Right Arm" -> {
-                return BodyParts.RIGHTARM
-            }
-            "Left Hand" -> {
-                return BodyParts.LEFTHAND
-            }
-            "Left Foot" -> {
-                return BodyParts.LEFTFOOT
-            }
-            "Left Leg" -> {
-                return BodyParts.LEFTLEG
-            }
-            "Right Hand" -> {
-                return BodyParts.RIGHTHAND
-            }
-            "Right Foot" -> {
-                return BodyParts.RIGHTFOOT
-            }
-            "Right Leg" -> {
-                return BodyParts.RIGHTLEG
-            }
-            "Torso" -> {
-                return BodyParts.TORSO
-            }
-            "Head" -> {
-                return BodyParts.HEAD
-            }
-            "Neck" -> {
-                return BodyParts.NECK
-            }
-            "Spine" -> {
-                return BodyParts.SPINE
-            }
-            else -> {
-               return BodyParts.DEFAULT
-            }
+            "Left Arm" -> return BodyParts.LEFTARM
+            "Right Arm" -> return BodyParts.RIGHTARM
+            "Left Hand" -> return BodyParts.LEFTHAND
+            "Left Foot" -> return BodyParts.LEFTFOOT
+            "Left Leg" -> return BodyParts.LEFTLEG
+            "Right Hand" -> return BodyParts.RIGHTHAND
+            "Right Foot" -> return BodyParts.RIGHTFOOT
+            "Right Leg" -> return BodyParts.RIGHTLEG
+            "Torso" -> return BodyParts.TORSO
+            "Head" -> return BodyParts.HEAD
+            "Neck" -> return BodyParts.NECK
+            "Spine" -> return BodyParts.SPINE
+            else -> return BodyParts.DEFAULT
         }
     }
 
@@ -105,18 +71,10 @@ object NACiveUtils {
 
     fun returnFreqEnum(freq : String) : ScheduleFrequency{
         when(freq){
-            "Always" -> {
-                return ScheduleFrequency.ALWAYS
-            }
-            "Scheduled" -> {
-                return ScheduleFrequency.SCHEDULED
-            }
-            "Random" -> {
-                return ScheduleFrequency.RANDOM
-            }
-            else -> {
-                return ScheduleFrequency.UNKNOWN
-            }
+            "Always" -> return ScheduleFrequency.ALWAYS
+            "Scheduled" -> return ScheduleFrequency.SCHEDULED
+            "Random" -> return ScheduleFrequency.RANDOM
+            else -> return ScheduleFrequency.UNKNOWN
         }
     }
 

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="au.org.nac.nactive">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
             android:name=".NACtiveApp"
@@ -13,33 +13,35 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".NACtive.MainActivity">
+        <activity android:name=".nactive.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".NACtive.Setup">
+        <activity android:name=".nactive.Setup">
         </activity>
-        <activity android:name=".NACtive.Information">
+        <activity android:name=".nactive.Information">
         </activity>
-        <activity android:name=".NACtive.ExercisesActivity">
+        <activity android:name=".nactive.ExercisesActivity">
         </activity>
-        <activity android:name=".NACtive.EditExercise">
+        <activity android:name=".nactive.EditExercise">
         </activity>
-        <activity android:name=".NACtive.EditUser">
+        <activity android:name=".nactive.EditUser">
         </activity>
-        <activity android:name=".NACtive.SupportAct">
+        <activity android:name=".nactive.SupportAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".NACtive.EditWorkOut">
+        <activity android:name=".nactive.EditWorkOut">
         </activity>
-        <activity android:name=".NACtive.UserDiary">
+        <activity android:name=".nactive.UserDiary">
+        </activity>
+        <activity android:name=".nactive.Options">
         </activity>
     </application>
 

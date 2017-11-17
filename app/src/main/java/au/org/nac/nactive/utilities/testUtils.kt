@@ -1,4 +1,4 @@
-package au.org.nac.nactive.Utils
+package au.org.nac.nactive.utilities
 
 import java.util.Arrays
 

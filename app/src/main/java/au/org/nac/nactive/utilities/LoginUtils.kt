@@ -1,8 +1,7 @@
-package au.org.nac.nactive.Utils
+package au.org.nac.nactive.utilities
 
 import android.util.Log
 import au.org.nac.nactive.BuildConfig
-import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.model.CurrentUser
 import au.org.nac.nactive.model.User
 import au.org.nac.nactive.model.User_
@@ -68,11 +67,11 @@ object LoginUtils {
             user = User()
             user.name = name
             user.googleUID = googleUID
-            user.createdDate = NACiveUtils.getDate(System.currentTimeMillis())
+            user.createdDate = NACtiveUtilities.getDate(System.currentTimeMillis())
             box.put(user)
             Log.i(TAG, "New User Signed In" + user.id)
         } else {
-            NACiveUtils.setCurrentUser(name, id, true)
+            NACtiveUtilities.setCurrentUser(name, id, true)
             Log.i(TAG, "User Signed in " + id)
         }
     }
@@ -89,10 +88,10 @@ object LoginUtils {
             user = User()
             user.name = name
             user.googleUID = googleUID
-            user.createdDate = NACiveUtils.getDate(System.currentTimeMillis())
+            user.createdDate = NACtiveUtilities.getDate(System.currentTimeMillis())
             box.put(user)
         } else {
-            NACiveUtils.setCurrentUser(name, id, isGUser = false)
+            NACtiveUtilities.setCurrentUser(name, id, isGUser = false)
         }
     }
 

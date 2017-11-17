@@ -1,4 +1,4 @@
-package au.org.nac.nactive.NACtive
+package au.org.nac.nactive.nactive
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -8,12 +8,11 @@ import android.view.View
 import android.widget.*
 import au.org.nac.nactive.NACtiveApp
 import au.org.nac.nactive.R
-import au.org.nac.nactive.Utils.NACiveUtils
+import au.org.nac.nactive.utilities.NACtiveUtilities
 import au.org.nac.nactive.adapters.ExerciseAdapter
 import au.org.nac.nactive.model.*
 import au.org.nac.nactive.model.Constants.Companion.USERIDKEY
 import au.org.nac.nactive.model.Constants.Companion.WORKOUTIDKEY
-import com.mcxiaoke.koi.ext.onItemClick
 import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
 import io.objectbox.query.Query
@@ -99,7 +98,7 @@ class EditWorkOut : AppCompatActivity() {
         } else {
             workoutQuery = workoutBox.query().equal(WorkOutSession_.id, workOutId).build()
             workOut = workoutQuery.findUnique() as WorkOutSession
-            isFreq = NACiveUtils.returnFreqEnum(workOut.frequencySchedule.toString())
+            isFreq = NACtiveUtilities.returnFreqEnum(workOut.frequencySchedule.toString())
             val workOutEList = workOut.exercises
             exerciseList = mutableListOf()
             if(workOut.exercises.isNotEmpty()){ //Add Exercises from WorkOut Exercise List
@@ -175,7 +174,7 @@ class EditWorkOut : AppCompatActivity() {
         var defaultPosition = bpAdapter.getPosition(BodyParts.DEFAULT)
 
         if(!isNewExercise){
-            val selectBodyParts = NACiveUtils.returnBodyPart(workOut.areaOfFocus.toString())
+            val selectBodyParts = NACtiveUtilities.returnBodyPart(workOut.areaOfFocus.toString())
             defaultPosition = bpAdapter.getPosition(selectBodyParts)
         }
 
@@ -221,6 +220,7 @@ class EditWorkOut : AppCompatActivity() {
             updateFreq(isFreq)
         }
         Log.i(TAG, "--Radio Button Group--")
+
 
         updateFreq(isFreq)
 
@@ -281,8 +281,8 @@ class EditWorkOut : AppCompatActivity() {
         workoutBox.put(workOut)
         when(isFreq){
             ScheduleFrequency.ALWAYS -> {
-                NACiveUtils.setUserCurrentWorkOutSession(user as User, userBox, workOutId)
-                NACiveUtils.setUserNextWorkOutSession(user as User, userBox, workOutId)
+                NACtiveUtilities.setUserCurrentWorkOutSession(user as User, userBox, workOutId)
+                NACtiveUtilities.setUserNextWorkOutSession(user as User, userBox, workOutId)
             }
             ScheduleFrequency.SCHEDULED -> {
                 //TODO Set Schedule Freq
@@ -291,8 +291,8 @@ class EditWorkOut : AppCompatActivity() {
                 //TODO set Random Freq
             }
             else -> {
-                NACiveUtils.setUserCurrentWorkOutSession(user as User, userBox, workOutId)
-                NACiveUtils.setUserNextWorkOutSession(user as User, userBox, workOutId)
+                NACtiveUtilities.setUserCurrentWorkOutSession(user as User, userBox, workOutId)
+                NACtiveUtilities.setUserNextWorkOutSession(user as User, userBox, workOutId)
             }
         }
         workOutId = workOut.id

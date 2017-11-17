@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/mainbgcolor"
-        tools:context="au.org.nac.nactive.NACtive.Setup"
+        tools:context="au.org.nac.nactive.nactive.Setup"
         >
 
     <TextView
@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/setup_appsettings_btn"
                 android:layout_weight="1"/>
+
     </LinearLayout>
 
     <Button
